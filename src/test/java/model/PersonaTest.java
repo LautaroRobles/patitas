@@ -6,7 +6,7 @@ import org.junit.Test;
 public class PersonaTest {
 
     @Test
-    public void contraseniaValidada()
+    public void contraseniaValidaYNoValida()
     {
         Persona lautaro = new Persona();
         lautaro.setNombre("Lautaro");
