@@ -20,7 +20,7 @@ public class TestController {
     @GetMapping("/persona")
     public LeerPersonaDTO damePersona() {
         Persona persona = new Persona();
-        persona.setNombre("Lautaro");
+        persona.setNombre("Tomi");
         persona.setContrasenia("1234");
 
         LeerPersonaDTO personaDTO = modelMapper.map(persona, LeerPersonaDTO.class);

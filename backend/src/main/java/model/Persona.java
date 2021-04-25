@@ -7,7 +7,7 @@ public class Persona {
 
     public Boolean contraseniaValida()
     {
-        return contrasenia.length() > 8;
+        return contrasenia.length() > 10;
     }
 
     public String getNombre() {
