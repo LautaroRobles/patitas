@@ -1,14 +1,8 @@
-package model;
+package model.dto;
 
-public class Persona {
+public class CrearPersonaDTO {
     private String nombre;
     private String contrasenia;
-    private boolean esAdmin;
-
-    public Boolean contraseniaValida()
-    {
-        return contrasenia.length() > 8;
-    }
 
     public String getNombre() {
         return nombre;
@@ -26,11 +20,4 @@ public class Persona {
         this.contrasenia = contrasenia;
     }
 
-    public boolean isEsAdmin() {
-        return esAdmin;
-    }
-
-    public void setEsAdmin(boolean esAdmin) {
-        this.esAdmin = esAdmin;
-    }
 }
