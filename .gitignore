@@ -150,16 +150,15 @@ buildNumber.properties
 # Recommended template: Node.gitignore
 
 docs/_book
-test/
 
 ### Vuejs ###
 # Recommended template: Node.gitignore
 
+node/
 node_modules/
 dist/
 npm-debug.log
 yarn-error.log
 
-node/
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,maven,java,vue,vuejs
