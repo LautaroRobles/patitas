@@ -1,7 +1,6 @@
 package controllers;
 
 import model.Persona;
-import model.dto.LeerPersonaDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +17,10 @@ public class TestController {
         return persona;
     }
     @GetMapping("/persona")
-    public LeerPersonaDTO damePersona() {
+    public Persona damePersona() {
         Persona persona = new Persona();
         persona.setNombre("Tomi");
         persona.setContrasenia("1234");
-
-        LeerPersonaDTO personaDTO = modelMapper.map(persona, LeerPersonaDTO.class);
-        return personaDTO;
+        return persona;
     }
 }
