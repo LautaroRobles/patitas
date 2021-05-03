@@ -1,7 +1,7 @@
 package model;
 
 import java.util.List;
-import java.util.*;
+import java.util.Date;
 
 public class Persona {
     private String nombre;

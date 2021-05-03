@@ -35,19 +35,4 @@ public class TestController {
 
         return validador.validarContrasenia(contrasenia);
     }
-
-    /*
-    @PostMapping("/persona")
-    public Persona modificarPersona(@RequestBody Persona persona) {
-        persona.setNombre(persona.getNombre() + "asd");
-        return persona;
-    }
-    @GetMapping("/persona")
-    public Persona damePersona() {
-        Persona persona = new Persona();
-        persona.setNombre("Tomi");
-        persona.setContrasenia("1234");
-        return persona;
-    }
-    */
 }

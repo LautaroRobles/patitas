@@ -21,7 +21,7 @@
 
     <dependencies>
         <!--
-        Esto no va porque si no no funca xd
+        Esto no va, porque si no, no funca xd
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -53,7 +53,7 @@
                     <arguments>
                         <argument>--spring.profiles.active=prod</argument>
                     </arguments>
-                    <finalName>patitas-test</finalName>
+                    <finalName>patitas</finalName>
                 </configuration>
             </plugin>
             <plugin>
