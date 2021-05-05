@@ -1,4 +1,4 @@
-package model.validadorContrasenia;
+package com.patitas.model.validadorContrasenia;
 
 import org.springframework.core.io.ClassPathResource;
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class ValidacionPeoresContrasenias extends ValidacionContrasenia{
             // Version vieja
             // File archivoPeoresContrasenias = new File("src/main/resources/contrasenias/peores-contrasenias.txt");
 
-            // Esta version funciona pero no cuando esta todo en un JAR
+            // Esta version funciona pero no cuando esta metido en un JAR
             // File archivoPeoresContrasenias = ResourceUtils.getFile("classpath:contrasenias/peores-contrasenias.txt");
 
             // Esta version funciona en todas las instancias

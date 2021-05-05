@@ -1,9 +1,9 @@
 package model;
 
-import model.validadorContrasenia.ValidacionContrasenia;
-import model.validadorContrasenia.ValidacionLongitud;
-import model.validadorContrasenia.ValidacionPeoresContrasenias;
-import model.validadorContrasenia.ValidadorContrasenia;
+import com.patitas.model.validadorContrasenia.ValidacionContrasenia;
+import com.patitas.model.validadorContrasenia.ValidacionLongitud;
+import com.patitas.model.validadorContrasenia.ValidacionPeoresContrasenias;
+import com.patitas.model.validadorContrasenia.ValidadorContrasenia;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

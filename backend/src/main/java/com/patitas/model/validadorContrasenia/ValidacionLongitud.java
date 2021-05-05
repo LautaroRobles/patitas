@@ -1,4 +1,4 @@
-package model.validadorContrasenia;
+package com.patitas.model.validadorContrasenia;
 
 public class ValidacionLongitud extends ValidacionContrasenia{
     public Boolean validarContrasenia(String contrasenia)

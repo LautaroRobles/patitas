@@ -1,12 +1,14 @@
-package controllers;
+package com.patitas.controllers;
 
-import model.Persona;
-import model.validadorContrasenia.ValidacionContrasenia;
-import model.validadorContrasenia.ValidacionLongitud;
-import model.validadorContrasenia.ValidacionPeoresContrasenias;
-import model.validadorContrasenia.ValidadorContrasenia;
+import com.patitas.model.Usuario;
+import com.patitas.model.validadorContrasenia.ValidacionContrasenia;
+import com.patitas.model.validadorContrasenia.ValidacionLongitud;
+import com.patitas.model.validadorContrasenia.ValidacionPeoresContrasenias;
+import com.patitas.model.validadorContrasenia.ValidadorContrasenia;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.patitas.repositories.UsuarioRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,9 @@ import java.util.List;
 public class TestController {
 
     private static final ModelMapper modelMapper = new ModelMapper();
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @GetMapping("/validar-contrasenia")
     public Boolean validarContrasenia(@RequestParam String contrasenia)

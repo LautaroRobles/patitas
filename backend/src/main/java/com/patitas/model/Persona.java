@@ -1,4 +1,4 @@
-package model;
+package com.patitas.model;
 
 import java.util.List;
 import java.util.Date;
