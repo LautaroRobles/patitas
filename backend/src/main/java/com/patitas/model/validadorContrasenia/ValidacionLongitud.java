@@ -1,9 +1,18 @@
 package com.patitas.model.validadorContrasenia;
 
 public class ValidacionLongitud extends ValidacionContrasenia{
-    public Boolean validarContrasenia(String contrasenia)
+    private int longitudMinima;
+    public Boolean validarContrasenia(String password, String username, String email)
     {
-        return contrasenia.length() > 8;
+        return password.length() > longitudMinima;
+    }
+
+    public int getLongitudMinima() {
+        return longitudMinima;
+    }
+
+    public void setLongitudMinima(int longitudMinima) {
+        this.longitudMinima = longitudMinima;
     }
 }
 

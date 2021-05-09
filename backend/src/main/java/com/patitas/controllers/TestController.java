@@ -1,6 +1,5 @@
 package com.patitas.controllers;
 
-import com.patitas.model.Usuario;
 import com.patitas.model.validadorContrasenia.ValidacionContrasenia;
 import com.patitas.model.validadorContrasenia.ValidacionLongitud;
 import com.patitas.model.validadorContrasenia.ValidacionPeoresContrasenias;
@@ -24,7 +23,7 @@ public class TestController {
     private UsuarioRepository usuarioRepository;
 
     @GetMapping("/validar-contrasenia")
-    public Boolean validarContrasenia(@RequestParam String contrasenia)
+    public Boolean validarContrasenia(@RequestParam String password, @RequestParam String username, @RequestParam String email)
     {
         ValidadorContrasenia validador = new ValidadorContrasenia();
 
@@ -38,6 +37,6 @@ public class TestController {
         // Establecemos al validador las validaciones que debe usar
         validador.setValidaciones(validaciones);
 
-        return validador.validarContrasenia(contrasenia);
+        return validador.validarContrasenia(password, username, email);
     }
 }

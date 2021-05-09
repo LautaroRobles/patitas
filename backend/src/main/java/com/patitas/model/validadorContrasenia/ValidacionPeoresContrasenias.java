@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class ValidacionPeoresContrasenias extends ValidacionContrasenia{
-    public Boolean validarContrasenia(String contrasenia) {
+    public Boolean validarContrasenia(String password, String username, String email) {
         Boolean contraseniaValida = true;
 
         try
@@ -24,7 +24,7 @@ public class ValidacionPeoresContrasenias extends ValidacionContrasenia{
             while (peoresContrasenias.hasNextLine() && contraseniaValida)
             {
                 String contraseniaMala = peoresContrasenias.nextLine();
-                if(contrasenia.equals(contraseniaMala))
+                if(password.equals(contraseniaMala))
                 {
                     contraseniaValida = false;
                 }

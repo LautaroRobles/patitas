@@ -1,9 +1,6 @@
 package model;
 
-import com.patitas.model.validadorContrasenia.ValidacionContrasenia;
-import com.patitas.model.validadorContrasenia.ValidacionLongitud;
-import com.patitas.model.validadorContrasenia.ValidacionPeoresContrasenias;
-import com.patitas.model.validadorContrasenia.ValidadorContrasenia;
+import com.patitas.model.validadorContrasenia.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,23 +18,34 @@ public class ContraseniaTest {
         List<ValidacionContrasenia> validaciones = new ArrayList<>();
         ValidacionLongitud validacionLongitud = new ValidacionLongitud();
         ValidacionPeoresContrasenias validacionPeoresContrasenias = new ValidacionPeoresContrasenias();
+        ValidacionMismoNombre validacionMismoNombre = new ValidacionMismoNombre();
+
+        validacionLongitud.setLongitudMinima(8);
 
         validaciones.add(validacionLongitud);
         validaciones.add(validacionPeoresContrasenias);
+        validaciones.add(validacionMismoNombre);
         // Establecemos al validador las validaciones que debe usar
         validador.setValidaciones(validaciones);
     }
     @Test
     public void contraseniaCorta()
     {
-        Assert.assertFalse(validador.validarContrasenia("cont"));
-        Assert.assertTrue(validador.validarContrasenia("contrasenia"));
+        Assert.assertFalse(validador.validarContrasenia("cont","",""));
+        Assert.assertTrue(validador.validarContrasenia("contrasenia","",""));
     }
     @Test
     public void contraseniaEnElTop10000()
     {
-        Assert.assertFalse(validador.validarContrasenia("qwertyuiop"));
-        Assert.assertFalse(validador.validarContrasenia("1234567890"));
-        Assert.assertTrue(validador.validarContrasenia("contrasenia_segura_y_larga"));
+        Assert.assertFalse(validador.validarContrasenia("qwertyuiop","",""));
+        Assert.assertFalse(validador.validarContrasenia("1234567890","",""));
+        Assert.assertTrue(validador.validarContrasenia("contrasenia_segura_y_larga","",""));
+    }
+    @Test
+    public void contraseniaMismoNombre()
+    {
+        Assert.assertTrue(validador.validarContrasenia("contraseniasegura","lautaro","lrobles@frba.utn.edu.ar"));
+        Assert.assertFalse(validador.validarContrasenia("tomygabutti@gmail.com","tomy","tomygabutti@gmail.com"));
+        Assert.assertFalse(validador.validarContrasenia("jose123456","jose123456","tomygabutti@gmail.com"));
     }
 }

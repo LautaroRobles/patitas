@@ -13,11 +13,10 @@ public class ValidadorContrasenia {
 
     private List<ValidacionContrasenia> validaciones;
 
-    public Boolean validarContrasenia(String contrasenia)
+    public Boolean validarContrasenia(String password, String username, String email)
     {
-        Boolean contraseniaValida = validaciones.stream().allMatch(
-                validacion -> validacion.validarContrasenia(contrasenia)
+        return validaciones.stream().allMatch(
+                validacion -> validacion.validarContrasenia(password, username, email)
         );
-        return contraseniaValida;
     }
 }

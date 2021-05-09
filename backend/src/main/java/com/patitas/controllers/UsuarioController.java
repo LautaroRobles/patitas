@@ -35,8 +35,8 @@ public class UsuarioController {
     public List<UsuarioDto> findAllUsuarios()
     {
         List<Usuario> usuarios = usuarioService.findAllUsuarios();
-        List<UsuarioDto> usuarioDtos = modelMapper.map(usuarios, new TypeToken<List<UsuarioDto>>(){}.getType());
-        return usuarioDtos;
+        List<UsuarioDto> usuariosDto = modelMapper.map(usuarios, new TypeToken<List<UsuarioDto>>(){}.getType());
+        return usuariosDto;
     }
 
     @GetMapping("/{id}")
@@ -75,7 +75,6 @@ public class UsuarioController {
     {
         try
         {
-            Usuario usuario = usuarioService.findUsuarioById(id);
             usuarioService.deleteUsuario(id);
         }
         catch (ResourceNotFoundException ex)
