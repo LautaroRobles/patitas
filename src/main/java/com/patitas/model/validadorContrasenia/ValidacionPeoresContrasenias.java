@@ -1,6 +1,7 @@
 package com.patitas.model.validadorContrasenia;
 
-import org.springframework.core.io.ClassPathResource;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -11,15 +12,8 @@ public class ValidacionPeoresContrasenias extends ValidacionContrasenia{
 
         try
         {
-            // Version vieja
-            // File archivoPeoresContrasenias = new File("src/main/resources/contrasenias/peores-contrasenias.txt");
-
-            // Esta version funciona pero no cuando esta metido en un JAR
-            // File archivoPeoresContrasenias = ResourceUtils.getFile("classpath:contrasenias/peores-contrasenias.txt");
-
-            // Esta version funciona en todas las instancias
-            // Recordar que para leer un archivo mejor leerlo como un Stream
-            InputStream streamPeoresContrasenias = new ClassPathResource("contrasenias/peores-contrasenias.txt").getInputStream();
+            File archivoPeoresContrasenias = new File("src/main/resources/contrasenias/peores-contrasenias.txt");
+            InputStream streamPeoresContrasenias = new FileInputStream(archivoPeoresContrasenias);
             Scanner peoresContrasenias = new Scanner(streamPeoresContrasenias);
             while (peoresContrasenias.hasNextLine() && contraseniaValida)
             {
