@@ -1,5 +1,7 @@
 package com.patitas.modelo;
 
+import java.util.List;
+
 public class Organizacion {
     private String nombre;
     private String direccion;
