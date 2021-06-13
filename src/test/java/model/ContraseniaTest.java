@@ -1,6 +1,6 @@
 package model;
 
-import com.patitas.model.validadorContrasenia.*;
+import com.patitas.seguridad.validadorContrasenia.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

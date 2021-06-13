@@ -1,4 +1,4 @@
-package com.patitas.model.validadorContrasenia;
+package com.patitas.seguridad.validadorContrasenia;
 
 import java.util.List;
 

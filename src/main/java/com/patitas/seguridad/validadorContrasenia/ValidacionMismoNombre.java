@@ -1,4 +1,4 @@
-package com.patitas.model.validadorContrasenia;
+package com.patitas.seguridad.validadorContrasenia;
 
 public class ValidacionMismoNombre extends ValidacionContrasenia{
     public Boolean validarContrasenia(String password, String username, String email)
