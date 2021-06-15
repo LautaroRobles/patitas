@@ -10,4 +10,60 @@ public class Rescatista {
   private String tipoDocumento;
   private String nroDocumento;
   private String direccion;
-  private list<Contacto> contactos;}
+  private list<Contacto> contactos;
+
+  public String getNombre() {
+        return nombre;
+    }
+  
+  public void setNombre(String nombre){
+    this.nombre = nombre;
+  }
+  
+  public String getApellido() {
+        return apellido;
+    }
+  
+  public void setApellido(String apellido){
+    this.apellido = apellido;
+  }
+
+  public Date getFechaNacimiento(){
+    return fechaNacimiento;
+}
+  public void setFechaNacimiento(int año, int mes, int dia){
+    fechaNacimiento = new Date(año, mes, dia);
+  }
+  public String getTipoDocumento() {
+        return tipoDocumento;
+    }
+  
+  public void setTipoDocumento(String tipoDocumento){
+    this.tipoDocumento = tipoDocumento;
+  }
+
+  public String getnroDocumento() {
+        return nroDocumento;
+    }
+  
+  public void setNroDocumento(String nroDocumento){
+    this.nroDocumento = nroDocumento;
+  }
+  
+  public String getDireccion() {
+        return direccion;
+    }
+  
+  public void setDireccion(String direccion){
+    this.direccion = direccion;
+  }
+  
+  public List<Contacto> getContactos() {
+        return contactos;
+    }
+  
+  public void setContactos(List<Contacto> contactos) {
+        this.contactos = contactos;
+    }
+}
+  
