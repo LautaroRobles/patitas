@@ -6,7 +6,8 @@ public class Organizacion {
     private String nombre;
     private String direccion;
     private List<TipoCaracteristica> caracteristicasDisponibles;
-    private List<Publicacion>publicaciones;
+    // TODO hacer las publicaciones
+    // private List<Publicacion>publicaciones;
 
     public String getNombre() {
         return nombre;
@@ -32,13 +33,13 @@ public class Organizacion {
         this.caracteristicasDisponibles = caracteristicasDisponibles;
     }
 
-    public List<Publicacion> getPublicaciones() {
-        return publicaciones;
-    }
-
-    public void setPublicaciones(List<Publicacion> publicaciones) {
-        this.publicaciones = publicaciones;
-    }
+//    public List<Publicacion> getPublicaciones() {
+//        return publicaciones;
+//    }
+//
+//    public void setPublicaciones(List<Publicacion> publicaciones) {
+//        this.publicaciones = publicaciones;
+//    }
 }
 
 

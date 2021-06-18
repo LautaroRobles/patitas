@@ -2,7 +2,7 @@ package com.patitas.modelo;
 
 import java.util.List;
 
-public class tipoCaracteristica {
+public class TipoCaracteristica {
   private String nombre;
   private Boolean disponible;
   
@@ -11,15 +11,15 @@ public class tipoCaracteristica {
   }
   
   public void setNombre(String nombre){
-    this.nombre = nombre
-    }
+    this.nombre = nombre;
+  }
   
   public Boolean getDisponible(){
     return disponible;
   }
   
   public void setDisponible(Boolean disponible){
-    this.disponible = disponible
-    }
+    this.disponible = disponible;
+  }
 }
     

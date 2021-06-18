@@ -10,7 +10,7 @@ public class Rescatista {
   private String tipoDocumento;
   private String nroDocumento;
   private String direccion;
-  private list<Contacto> contactos;
+  private List<Contacto> contactos;
 
   public String getNombre() {
         return nombre;
