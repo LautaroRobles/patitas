@@ -31,8 +31,8 @@ public class Rescatista {
   public Date getFechaNacimiento(){
     return fechaNacimiento;
 }
-  public void setFechaNacimiento(int año, int mes, int dia){
-    fechaNacimiento = new Date(año, mes, dia);
+  public void setFechaNacimiento(int anio, int mes, int dia){
+    fechaNacimiento = new Date(anio, mes, dia);
   }
   public String getTipoDocumento() {
         return tipoDocumento;
