@@ -6,54 +6,54 @@ import com.patitas.modelo.enviadorNotificaciones.Notificacion;
 import java.util.List;
 
 public class Contacto {
-  private String nombre;
-  private String apellido;
-  private String telefono;
-  private String email;
-  private List<Notificacion> formasNotificacion;
+    private String nombre;
+    private String apellido;
+    private String telefono;
+    private String email;
+    private List<Notificacion> formasNotificacion;
 
-  public void enviarNotificaciones(String mensaje) {
-    EnviadorNotificaciones enviadorNotificaciones = EnviadorNotificaciones.getInstancia();
-    enviadorNotificaciones.enviarNotificaciones(this.formasNotificacion, mensaje, this);
-  }
+    public void enviarNotificaciones(String mensaje) {
+        EnviadorNotificaciones enviadorNotificaciones = EnviadorNotificaciones.getInstancia();
+        enviadorNotificaciones.enviarNotificaciones(this.formasNotificacion, mensaje, this);
+    }
 
-  public String getNombre() {
-    return nombre;
-  }
+    public String getNombre() {
+        return nombre;
+    }
 
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
-  }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-  public String getApellido() {
-    return apellido;
-  }
+    public String getApellido() {
+        return apellido;
+    }
 
-  public void setApellido(String apellido) {
-    this.apellido = apellido;
-  }
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
-  public String getTelefono() {
-    return telefono;
-  }
+    public String getTelefono() {
+        return telefono;
+    }
 
-  public void setTelefono(String telefono) {
-    this.telefono = telefono;
-  }
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public String getEmail() {
+        return email;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  public List<Notificacion> getFormasNotificacion() {
-    return formasNotificacion;
-  }
+    public List<Notificacion> getFormasNotificacion() {
+        return formasNotificacion;
+    }
 
-  public void setNotificacion(List<Notificacion> formasNotificacion) {
-    this.formasNotificacion = formasNotificacion;
-  }
+    public void setNotificacion(List<Notificacion> formasNotificacion) {
+        this.formasNotificacion = formasNotificacion;
+    }
 }
