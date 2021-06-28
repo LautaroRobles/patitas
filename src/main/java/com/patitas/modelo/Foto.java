@@ -1,8 +1,7 @@
 package com.patitas.modelo;
 
 public class Foto {
-    private int ancho;
-    private int alto;
+    private Tamanio tamanio;
     private String calidad;
     private FormatoImagen formato;
 
@@ -10,21 +9,10 @@ public class Foto {
     public void normalizar() {}
 
     // Getters Setters
-    public int getAncho() {
-        return ancho;
-    }
 
-    public void setAncho(int ancho) {
-        this.ancho = ancho;
-    }
+    public Tamanio getTamanio() { return tamanio; }
 
-    public int getAlto() {
-        return alto;
-    }
-
-    public void setAlto(int alto) {
-        this.alto = alto;
-    }
+    public void setTamanio(Tamanio tamanio) { this.tamanio = tamanio; }
 
     public String getCalidad() {
         return calidad;

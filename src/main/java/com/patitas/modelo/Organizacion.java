@@ -4,10 +4,12 @@ import java.util.List;
 
 public class Organizacion {
     private String nombre;
-    private String direccion;
+    private PosicionGeografica ubicacion;
+    private String email;
     private List<TipoCaracteristica> caracteristicasDisponibles;
     // TODO hacer las publicaciones
     // private List<Publicacion>publicaciones;
+    private Tamanio tamanioEstandar;
 
     public String getNombre() {
         return nombre;
@@ -15,14 +17,6 @@ public class Organizacion {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
     }
 
     public List<TipoCaracteristica> getCaracteristicasDisponibles() {
@@ -40,6 +34,18 @@ public class Organizacion {
 //    public void setPublicaciones(List<Publicacion> publicaciones) {
 //        this.publicaciones = publicaciones;
 //    }
+
+    public PosicionGeografica getUbicacion() { return ubicacion; }
+
+    public void setUbicacion(PosicionGeografica ubicacion) { this.ubicacion = ubicacion; }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
+
+    public Tamanio getTamanioEstandar() { return tamanioEstandar; }
+
+    public void setTamanioEstandar(Tamanio tamanioEstandar) { this.tamanioEstandar = tamanioEstandar; }
 }
 
 
