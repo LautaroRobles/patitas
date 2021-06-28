@@ -35,7 +35,8 @@ Usuario Estandar           |  Usuario Admin
 ![image](https://drive.google.com/uc?export=view&id=1acgkCIkryqaXA1HwV6s9Fr5uvngdmcwr)
 
 ## Justificaciones de diseño
-[Justificaciones de diseño - Entrega 2.xlsx](ttps://drive.google.com/file/d/1IBQDNF-H-5XP-2v8tV4tBxelqK1QSVDT/view?usp=sharing)
+[Justificaciones de diseño - Entrega 2.xlsx](https://drive.google.com/file/d/1IBQDNF-H-5XP-2v8tV4tBxelqK1QSVDT/view?usp=sharing)
+
 ---
 
 # Entrega 1
