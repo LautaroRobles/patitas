@@ -13,8 +13,10 @@ Repositorio del Trabajo Práctico Anual del Grupo 4 de Diseño de Sistemas
 # Entrega 2
 ## Diagrama de clases (Modelo)
 ![image](https://drive.google.com/uc?export=view&id=1fo_mu9iIUW6eEvhNTbNSf627I4nh2Zai)
+
 ## Diagrama de clases (Seguridad)
 ![image](https://drive.google.com/uc?export=view&id=1yfefsJn9cYS3vzQJ8nLzjxsxGNTCrH-T)
+
 ## Wireframes
 Para registrar una mascota
 Datos Persona              |  Datos Mascotas           |  Finalizar
