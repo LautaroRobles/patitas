@@ -11,7 +11,7 @@ import com.patitas.modelo.enviadorNotificaciones.Email;
 import java.util.ArrayList;
 import java.util.List;
 
-public class App {
+public class TwilioTest {
     // Find your Account Sid and Token at twilio.com/user/account
     public static final String ACCOUNT_SID = "AC253d2f071fc04f4edd959b96175d5672";
     public static final String AUTH_TOKEN = "282e56748a794e87633cf2e16f115bd7";
