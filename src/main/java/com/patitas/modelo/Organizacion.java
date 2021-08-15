@@ -7,8 +7,7 @@ public class Organizacion {
     private PosicionGeografica ubicacion;
     private String email;
     private List<TipoCaracteristica> caracteristicasDisponibles;
-    // TODO hacer las publicaciones
-    // private List<Publicacion>publicaciones;
+    private List<Publicacion>publicaciones;
     private Tamanio tamanioEstandar;
 
     public String getNombre() {
@@ -27,13 +26,13 @@ public class Organizacion {
         this.caracteristicasDisponibles = caracteristicasDisponibles;
     }
 
-//    public List<Publicacion> getPublicaciones() {
-//        return publicaciones;
-//    }
-//
-//    public void setPublicaciones(List<Publicacion> publicaciones) {
-//        this.publicaciones = publicaciones;
-//    }
+    public List<Publicacion> getPublicaciones() {
+        return publicaciones;
+    }
+
+    public void setPublicaciones(List<Publicacion> publicaciones) {
+        this.publicaciones = publicaciones;
+    }
 
     public PosicionGeografica getUbicacion() { return ubicacion; }
 

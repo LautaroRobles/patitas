@@ -23,7 +23,7 @@ public class EnviadorNotificaciones {
         return instancia;
     }
 
-    public void enviarNotificaciones(List<Notificacion> notificaciones, String mensaje, Contacto contacto) {
+    public void enviarNotificaciones(List<Notificacion> notificaciones, Mensaje mensaje, Contacto contacto) {
         notificaciones.forEach(notificacion -> {
             notificacion.enviar(mensaje, contacto);
         });

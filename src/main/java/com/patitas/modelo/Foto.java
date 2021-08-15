@@ -5,8 +5,9 @@ public class Foto {
     private String calidad;
     private FormatoImagen formato;
 
-    // TODO definir normalizar
-    public void normalizar() {}
+    public void normalizar(Tamanio tamanioEstandar) {
+        this.tamanio = tamanioEstandar;
+    }
 
     // Getters Setters
 

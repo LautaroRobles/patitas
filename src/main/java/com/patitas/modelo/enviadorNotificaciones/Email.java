@@ -13,13 +13,13 @@ import java.io.IOException;
 public class Email extends Notificacion {
     private static final String SENDGRID_API_KEY = "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";
 
-    public void enviar(String mensaje, Contacto contacto) {
+    public void enviar(Mensaje mensaje, Contacto contacto) {
         try {
             com.sendgrid.helpers.mail.objects.Email from = new com.sendgrid.helpers.mail.objects.Email("lrobles@frba.utn.edu.ar");
             com.sendgrid.helpers.mail.objects.Email to = new com.sendgrid.helpers.mail.objects.Email(contacto.getEmail());
 
-            String subject = "Probando";
-            Content content = new Content("text/html", mensaje);
+            String subject = mensaje.getTitulo();
+            Content content = new Content("text/html", mensaje.getCuerpo());
 
             Mail mail = new Mail(from, subject, to, content);
 

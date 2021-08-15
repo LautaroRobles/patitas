@@ -1,6 +1,7 @@
 package com.patitas.modelo;
 
 import com.patitas.modelo.enviadorNotificaciones.EnviadorNotificaciones;
+import com.patitas.modelo.enviadorNotificaciones.Mensaje;
 import com.patitas.modelo.enviadorNotificaciones.Notificacion;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class Contacto {
     private String email;
     private List<Notificacion> formasNotificacion;
 
-    public void enviarNotificaciones(String mensaje) {
+    public void enviarNotificaciones(Mensaje mensaje) {
         EnviadorNotificaciones enviadorNotificaciones = EnviadorNotificaciones.getInstancia();
         enviadorNotificaciones.enviarNotificaciones(this.formasNotificacion, mensaje, this);
     }

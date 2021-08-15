@@ -3,10 +3,7 @@ package com.patitas;
 import com.patitas.modelo.Contacto;
 import com.patitas.modelo.buscadorHogares.BuscadorHogarTransito;
 import com.patitas.modelo.buscadorHogares.HogarTransito;
-import com.patitas.modelo.enviadorNotificaciones.Notificacion;
-import com.patitas.modelo.enviadorNotificaciones.SMS;
-import com.patitas.modelo.enviadorNotificaciones.Whatsapp;
-import com.patitas.modelo.enviadorNotificaciones.Email;
+import com.patitas.modelo.enviadorNotificaciones.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +16,6 @@ public class TwilioTest {
 
     public static void main(String args[]) {
         Notificaciones();
-        ApiRest();
     }
     private static void Notificaciones() {
         // Probando las notificaciones
@@ -51,26 +47,15 @@ public class TwilioTest {
         contactoCarol.setNotificacion(notificacionesPreferidasCarol);
 
         // Encontramos a tu mascota! Enviar notificacion
-        contactoCarol.enviarNotificaciones("Te encontramos a tu mascota! " + contactoCarol.getNombre());
-        contactoLautaro.enviarNotificaciones("Te encontramos a tu mascota! " + contactoLautaro.getNombre());
-    }
+        Mensaje mensajeCarol = new Mensaje();
+        mensajeCarol.setTitulo("Encontramos a tu mascota");
+        mensajeCarol.setCuerpo("Hola " + contactoCarol.getNombre() + ", encontramos a tu mascota");
 
-    private static void ApiRest() {
+        Mensaje mensajeLautaro = new Mensaje();
+        mensajeLautaro.setTitulo("Encontramos a tu mascota");
+        mensajeLautaro.setCuerpo("Hola " + contactoLautaro.getNombre() + ", encontramos a tu mascota");
 
-        // Probando el buscador de hogar de transito
-        BuscadorHogarTransito buscador = BuscadorHogarTransito.getInstancia();
-
-        List<HogarTransito> hogares = buscador.buscarHogarTransito(1);
-
-        System.out.println("Hogares!");
-        hogares.forEach(hogar -> {
-            System.out.println("{");
-            System.out.println("nombre: " + hogar.getNombre());
-            System.out.println("ubicacion");
-            System.out.println("direccion: " + hogar.getUbicacion().getDireccion());
-            System.out.println("lat: " + hogar.getUbicacion().getLatitud());
-            System.out.println("long: " + hogar.getUbicacion().getLongitud());
-            System.out.println("}");
-        });
+        contactoCarol.enviarNotificaciones(mensajeCarol);
+        contactoLautaro.enviarNotificaciones(mensajeLautaro);
     }
 }
