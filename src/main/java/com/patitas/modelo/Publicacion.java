@@ -1,15 +1,16 @@
 package com.patitas.modelo;
-
+import java.util.List;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+
 
 public class Publicacion {
     private Organizacion organizacion;
     private Boolean aprobada;
     private Categoria categoria;
     private Persona autor;
-    Private String titulo;
-    Private String cuerpo;
-    Private List<Foto> fotos;
+    private String titulo;
+    private String cuerpo;
+    private List<Foto> fotos;
 
     public Organizacion getOrganizacion() {
         return organizacion;

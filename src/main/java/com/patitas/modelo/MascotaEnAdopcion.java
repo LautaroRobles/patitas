@@ -1,6 +1,7 @@
 package com.patitas.modelo;
+import java.util.List;
 
-public class MascotaEnAdopcion {
+public class MascotaEnAdopcion extends Publicacion{
     private List<Respuesta> respuestas;
     private List<Caracteristica> caracteristicas;
 

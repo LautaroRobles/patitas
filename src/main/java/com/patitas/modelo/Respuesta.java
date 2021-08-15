@@ -1,6 +1,6 @@
 package com.patitas.modelo;
 
-public class Respuesta {
+public class Respuesta  {
     private Pregunta pregunta;
     private String valor;
 }
