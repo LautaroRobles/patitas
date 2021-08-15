@@ -1,15 +1,17 @@
 package com.patitas.modelo;
-
+import java.util.List;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+
 
 public class Publicacion {
     private Organizacion organizacion;
     private Boolean aprobada;
     private Categoria categoria;
     private Persona autor;
-    Private String titulo;
-    Private String cuerpo;
-    Private List<Foto> fotos;
+    private String titulo;
+    private String cuerpo;
+    private List<Foto> fotos;
+
 
     public Organizacion getOrganizacion() {
         return organizacion;
@@ -19,11 +21,11 @@ public class Publicacion {
         this.organizacion = organizacion;
     }
 
-    public bool getAprobada() {
+    public Boolean getAprobada() {
         return aprobada;
     }
 
-    public void setAprobada(bool aprobada) {
+    public void setAprobada(Boolean aprobada) {
         this.aprobada = aprobada;
     }
 
@@ -43,24 +45,27 @@ public class Publicacion {
         this.autor = autor;
     }
 
-    public Private getString() {
-        return String;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setString(Private string) {
-        String = string;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public Private getList() {
-        return List;
+    public String getCuerpo() {
+        return cuerpo;
     }
 
-    public void setList(Private list) {
-        List = list;
+    public void setCuerpo(String cuerpo) {
+        this.cuerpo = cuerpo;
     }
 
+    public List<Foto> getFotos() {
+        return fotos;
+    }
 
-
-
-
+    public void setFotos(List<Foto> fotos) {
+        this.fotos = fotos;
+    }
 }
