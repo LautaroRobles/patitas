@@ -10,6 +10,12 @@ Repositorio del Trabajo Práctico Anual del Grupo 4 de Diseño de Sistemas
 |Robaina, Lucas          |1715069|
 |Robles, Lautaro         |1680870|
 
+# Entrega 3
+## Diagrama de clases (Modelo)
+![image](https://drive.google.com/uc?export=view&id=1yjpvc4ACS25JoNDWmrt_H4JNj2CQUeWd)
+
+---
+
 # Entrega 2
 ## Diagrama de clases (Modelo)
 ![image](https://drive.google.com/uc?export=view&id=1fo_mu9iIUW6eEvhNTbNSf627I4nh2Zai)
