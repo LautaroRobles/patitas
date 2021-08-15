@@ -13,11 +13,11 @@ public class MascotaEnAdopcion extends Publicacion{
         this.respuestas = respuestas;
     }
 
-    public Caracteristica getCaracteristicas() {
+    public List<Caracteristica> getCaracteristicas() {
         return caracteristicas;
     }
 
-    public void setCaracteristicas(Caracteristica caracteristicas) {
+    public void setCaracteristicas(List<Caracteristica> caracteristicas) {
         this.caracteristicas = caracteristicas;
     }
 }
