@@ -3,8 +3,6 @@ package com.patitas.modelo.scheduler;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
-import java.time.DayOfWeek;
-
 public class SchedulerRecomendaciones {
 
     public void comenzar() throws SchedulerException, InterruptedException {
@@ -27,9 +25,9 @@ public class SchedulerRecomendaciones {
                 .startNow()
                 .withSchedule(
                         // Scheduler que se ejecuta cada lunes ?
-                        //DailyTimeIntervalScheduleBuilder.dailyTimeIntervalSchedule().onDaysOfTheWeek(1)
+                        DailyTimeIntervalScheduleBuilder.dailyTimeIntervalSchedule().onDaysOfTheWeek(1)
                         // Scheduler que se ejecuta cada 2 segundos
-                        SimpleScheduleBuilder.repeatSecondlyForever(2)
+                        // SimpleScheduleBuilder.repeatSecondlyForever(10)
                 )
                 .build();
 

@@ -1,10 +1,11 @@
 package com.patitas.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Interesado extends Persona{
-    private List<Caracteristica> preferencias;
-    private List<Recomendacion> recomendacions;
+    private List<Caracteristica> preferencias = new ArrayList<>();
+    private List<Recomendacion> recomendaciones = new ArrayList<>();
 
 
     public List<Caracteristica> getPreferencias() {
@@ -15,11 +16,13 @@ public class Interesado extends Persona{
         this.preferencias = preferencias;
     }
 
-    public List<Recomendacion> getRecomendacions() {
-        return recomendacions;
+    public List<Recomendacion> getRecomendaciones() {
+        return recomendaciones;
     }
 
-    public void setRecomendacions(List<Recomendacion> recomendacions) {
-        this.recomendacions = recomendacions;
+    public void setRecomendaciones(List<Recomendacion> recomendaciones) {
+        this.recomendaciones = recomendaciones;
     }
+
+    public void addRecomendacion(Recomendacion recomendacion) { this.recomendaciones.add(recomendacion); }
 }
