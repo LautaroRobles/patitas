@@ -25,9 +25,9 @@ public class SchedulerRecomendaciones {
                 .startNow()
                 .withSchedule(
                         // Scheduler que se ejecuta cada lunes ?
-                        DailyTimeIntervalScheduleBuilder.dailyTimeIntervalSchedule().onDaysOfTheWeek(1)
-                        // Scheduler que se ejecuta cada 2 segundos
-                        // SimpleScheduleBuilder.repeatSecondlyForever(10)
+                        // DailyTimeIntervalScheduleBuilder.dailyTimeIntervalSchedule().onDaysOfTheWeek(1)
+                        // Scheduler que se ejecuta cada 10 segundos
+                        SimpleScheduleBuilder.repeatSecondlyForever(10)
                 )
                 .build();
 

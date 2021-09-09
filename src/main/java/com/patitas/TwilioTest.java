@@ -34,28 +34,28 @@ public class TwilioTest {
         contactoLautaro.setNotificacion(notificacionesPreferidasLautaro);
 
         // Contacto de Carol
-        Contacto contactoCarol = new Contacto();
-        contactoCarol.setApellido("Navia");
-        contactoCarol.setNombre("Carol");
-        contactoCarol.setTelefono("+5491150966922");
-        contactoCarol.setEmail("carolmdz2006@gmail.com");
+        //Contacto contactoCarol = new Contacto();
+        //contactoCarol.setApellido("Navia");
+        //contactoCarol.setNombre("Carol");
+        //contactoCarol.setTelefono("+5491150966922");
+        //contactoCarol.setEmail("carolmdz2006@gmail.com");
 
         List<Notificacion> notificacionesPreferidasCarol = new ArrayList<>();
         notificacionesPreferidasCarol.add(new Whatsapp());
         notificacionesPreferidasCarol.add(new SMS());
 
-        contactoCarol.setNotificacion(notificacionesPreferidasCarol);
+        //contactoCarol.setNotificacion(notificacionesPreferidasCarol);
 
         // Encontramos a tu mascota! Enviar notificacion
         Mensaje mensajeCarol = new Mensaje();
         mensajeCarol.setTitulo("Encontramos a tu mascota");
-        mensajeCarol.setCuerpo("Hola " + contactoCarol.getNombre() + ", encontramos a tu mascota");
+        //mensajeCarol.setCuerpo("Hola " + contactoCarol.getNombre() + ", encontramos a tu mascota");
 
         Mensaje mensajeLautaro = new Mensaje();
         mensajeLautaro.setTitulo("Encontramos a tu mascota");
         mensajeLautaro.setCuerpo("Hola " + contactoLautaro.getNombre() + ", encontramos a tu mascota");
 
-        contactoCarol.enviarNotificaciones(mensajeCarol);
+        //contactoCarol.enviarNotificaciones(mensajeCarol);
         contactoLautaro.enviarNotificaciones(mensajeLautaro);
     }
 }
