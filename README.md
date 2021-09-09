@@ -14,6 +14,9 @@ Repositorio del Trabajo Práctico Anual del Grupo 4 de Diseño de Sistemas
 ## Diagrama de clases (Modelo)
 ![image](https://drive.google.com/uc?export=view&id=1yjpvc4ACS25JoNDWmrt_H4JNj2CQUeWd)
 
+## Justificaciones de diseño
+[Justificaciones de diseño - Entrega 3.xlsx](https://drive.google.com/file/d/1P_DejKiV-6MKI8GMEhSGQjpfC7YpVH_C/view?usp=sharing)
+
 ---
 
 # Entrega 2
