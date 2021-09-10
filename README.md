@@ -5,10 +5,21 @@ Repositorio del Trabajo Práctico Anual del Grupo 4 de Diseño de Sistemas
 |------------------------|-------|
 |Barreto, José           |1558729|
 |Gabutti, Tomás Francisco|1646590|
-|Navia, Carol            |1449448|
 |Robaina, Juan           |1714995|
 |Robaina, Lucas          |1715069|
 |Robles, Lautaro         |1680870|
+
+# Entrega 4.1
+## Mockups
+[Link al drive](https://drive.google.com/drive/folders/1AnGFLflSi1PjZnw4mnlD_VlUK5FQyXhk?usp=sharing)
+
+## Diseño de casos de uso
+![image](https://drive.google.com/uc?export=view&id=1fW5DMZKUMy1GBy3t30Jug47iFtADFdYk)
+
+## Diagrama de clase (Hogares de transito)
+![image](https://drive.google.com/uc?export=view&id=1R0Wv8zibpgynKU93lz0nNnxK3gCB3Ksn)
+
+---
 
 # Entrega 3
 ## Diagrama de clases (Modelo)
