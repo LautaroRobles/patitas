@@ -1,8 +1,5 @@
 package com.patitas.modelo;
 
-import java.util.List;
-import java.util.Date;
-
 public class Rescatista extends Persona{
     private String direccion;
 

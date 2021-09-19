@@ -1,8 +1,6 @@
 package com.patitas;
 
 import com.patitas.modelo.Contacto;
-import com.patitas.modelo.buscadorHogares.BuscadorHogarTransito;
-import com.patitas.modelo.buscadorHogares.HogarTransito;
 import com.patitas.modelo.enviadorNotificaciones.*;
 
 import java.util.ArrayList;

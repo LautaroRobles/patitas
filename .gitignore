@@ -145,6 +145,9 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 .flattened-pom.xml
 
+### Iml ###
+*.iml
+
 ### Vue ###
 # gitignore template for Vue.js projects
 #

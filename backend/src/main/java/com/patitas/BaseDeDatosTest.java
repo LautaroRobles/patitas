@@ -2,7 +2,6 @@ package com.patitas;
 
 import com.patitas.modelo.Persona;
 import com.patitas.modelo.Publicacion;
-import com.patitas.modelo.buscadorHogares.BuscadorHogarTransito;
 
 import java.util.ArrayList;
 import java.util.List;

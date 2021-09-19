@@ -3,7 +3,6 @@ package com.patitas;
 import com.patitas.modelo.*;
 import com.patitas.modelo.scheduler.SchedulerRecomendaciones;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 

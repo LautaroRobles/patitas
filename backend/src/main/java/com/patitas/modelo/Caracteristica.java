@@ -1,7 +1,5 @@
 package com.patitas.modelo;
 
-import java.util.List;
-
 public class Caracteristica {
     private TipoCaracteristica tipoCaracteristica;
     private String valor;

@@ -1,6 +1,5 @@
 package com.patitas.modelo;
 import java.util.List;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 
 public class Publicacion {
