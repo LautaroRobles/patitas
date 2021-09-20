@@ -18,30 +18,45 @@
     </properties>
 
     <dependencies>
-        <dependency>
+        <dependency> <!--Spring Boot-->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency> <!--WebClient (consumir una api)-->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency> <!--Para la persistencia-->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency> <!--Conector de base de datos mariadb-->
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+        <dependency> <!--Para las anotaciones @Getter @Setter-->
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.20</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
+        <dependency> <!--Para castear a un DTO y enviar un JSON-->
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
             <version>2.4.1</version>
         </dependency>
-        <dependency> <!--Biblioteca para WebClient (consumir una api)-->
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-        <dependency> <!--Biblioteca para enviar las notificaciones-->
+        <dependency> <!--Twilio para enviar las notificaciones-->
             <groupId>com.twilio.sdk</groupId>
             <artifactId>twilio</artifactId>
             <version>8.15.0</version>
         </dependency>
-        <dependency>
+        <dependency> <!--Twilio para enviar mails-->
             <groupId>com.sendgrid</groupId>
             <artifactId>sendgrid-java</artifactId>
             <version>4.4.1</version>
