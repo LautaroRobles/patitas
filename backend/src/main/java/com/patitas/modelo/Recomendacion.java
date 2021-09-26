@@ -1,24 +1,13 @@
 package com.patitas.modelo;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
+@Getter
+@Setter
 public class Recomendacion {
     private MascotaEnAdopcion publicacion;
     private Date fecha;
-
-    public MascotaEnAdopcion getPublicacion() {
-        return publicacion;
-    }
-
-    public void setPublicacion(MascotaEnAdopcion publicacion) {
-        this.publicacion = publicacion;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
 }

@@ -9,13 +9,13 @@ import java.util.Arrays;
 
 public class MascotaEnAdopcionTest {
 
-    private DuenioMascota duenioMascota;
-    private DuenioMascota interesado;
+    private Persona duenioMascota;
+    private Persona interesado;
     private MascotaEnAdopcion publicacion;
 
     @Before
     public void init() {
-        this.duenioMascota = new DuenioMascota();
+        this.duenioMascota = new Persona();
         this.duenioMascota.setNombre("Javier");
         this.duenioMascota.setApellido("Blanco");
 
@@ -23,23 +23,23 @@ public class MascotaEnAdopcionTest {
         contactoTomi.setNombre("Tomi");
         contactoTomi.setApellido("Gabutti");
         contactoTomi.setTelefono("+5491141882877");
-        contactoTomi.setNotificacion(Arrays.asList(new Whatsapp()));
+        contactoTomi.setFormasNotificacion(Arrays.asList(new Whatsapp()));
 
         Contacto contactoJose = new Contacto();
         contactoJose.setNombre("Jose");
         contactoJose.setApellido("Barreto");
         contactoJose.setTelefono("+5491138814218");
-        contactoJose.setNotificacion(Arrays.asList(new Whatsapp()));
+        contactoJose.setFormasNotificacion(Arrays.asList(new Whatsapp()));
 
         Contacto contactoLau = new Contacto();
         contactoLau.setNombre("Lautaro");
         contactoLau.setApellido("Robles");
         contactoLau.setTelefono("+5491123121301");
-        contactoLau.setNotificacion(Arrays.asList(new Whatsapp()));
+        contactoLau.setFormasNotificacion(Arrays.asList(new Whatsapp()));
 
         this.duenioMascota.setContactos(Arrays.asList(contactoTomi, contactoJose, contactoLau));
 
-        this.interesado = new DuenioMascota();
+        this.interesado = new Persona();
         this.interesado.setNombre("Lucas");
         this.interesado.setApellido("Robaina");
 
@@ -58,7 +58,7 @@ public class MascotaEnAdopcionTest {
         mascota.setEspecie(Especie.Perro);
         mascota.setEdad(7);
 
-        this.duenioMascota.setMascotas(Arrays.asList(mascota));
+        this.duenioMascota.setMascota(Arrays.asList(mascota));
 
         this.publicacion = new MascotaEnAdopcion();
         this.publicacion.setTitulo("Mascota en Adopción");

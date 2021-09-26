@@ -9,14 +9,14 @@ import java.util.List;
 @Getter @Setter
 @Entity
 @Table
-public class Mascota {
+public class Mascota{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Transient
     private Organizacion organizacion;
     @Transient
-    private DuenioMascota duenio;
+    private Persona duenio;
     private Especie especie;
     private String nombre;
     private String apodo;

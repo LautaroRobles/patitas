@@ -17,10 +17,10 @@ public class JobRecomendacion implements Job {
         BaseDeDatosTest db = BaseDeDatosTest.getInstancia();
 
         // Se obtienen el listado de interesados y de publicaciones de mascotas en adopcion (De la base de datos)
-        List<Interesado> interesados = db.getPersonas()
+        List<QuieroAdoptar> interesados = db.getPublicaciones()
                 .stream()
-                .filter(persona -> persona instanceof Interesado)
-                .map(persona -> (Interesado) persona)
+                .filter(publicacion -> publicacion instanceof QuieroAdoptar)
+                .map(publicacion -> (QuieroAdoptar) publicacion)
                 .collect(Collectors.toList());
 
         List<MascotaEnAdopcion> publicaciones = db.getPublicaciones()
