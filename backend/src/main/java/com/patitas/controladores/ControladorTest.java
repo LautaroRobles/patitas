@@ -22,6 +22,6 @@ public class ControladorTest {
     @PostMapping("/mascota")
     public ResponseEntity<Mascota> GuardarMascota(@RequestBody Mascota mascota) {
         Mascota mascotaGuardada = repositorioMascota.save(mascota);
-        return new ResponseEntity<Mascota>(mascotaGuardada, HttpStatus.OK);
+        return new ResponseEntity<Mascota>(mascotaGuardada, HttpStatus.CREATED);
     }
 }
