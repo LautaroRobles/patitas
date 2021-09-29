@@ -4,6 +4,7 @@ import com.patitas.modelo.Contacto;
 import com.twilio.Twilio;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EnviadorNotificaciones {
 
@@ -23,9 +24,19 @@ public class EnviadorNotificaciones {
         return instancia;
     }
 
-    public void enviarNotificaciones(List<Notificacion> notificaciones, Mensaje mensaje, Contacto contacto) {
-        notificaciones.forEach(notificacion -> {
-            notificacion.enviar(mensaje, contacto);
+    public void enviarNotificaciones(List<TipoNotificacion> tiposNotificaciones, Mensaje mensaje, Contacto contacto) {
+
+        List<EstrategiaNotificacion> estrategiasNotificacion = tiposNotificaciones.stream().map(tipoNotificacion -> {
+            switch (tipoNotificacion) {
+                case SMS: return new SMS();
+                case Whatsapp: return new Whatsapp();
+                case Email: return new Email();
+                default: return null;
+            }
+        }).collect(Collectors.toList());
+
+        estrategiasNotificacion.forEach(estrategiaNotificacion -> {
+            estrategiaNotificacion.enviar(mensaje, contacto);
         });
     }
 }

@@ -1,6 +1,7 @@
 package model;
 
 import com.patitas.modelo.*;
+import com.patitas.modelo.enviadorNotificaciones.TipoNotificacion;
 import com.patitas.modelo.enviadorNotificaciones.Whatsapp;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,19 +24,19 @@ public class MascotaEnAdopcionTest {
         contactoTomi.setNombre("Tomi");
         contactoTomi.setApellido("Gabutti");
         contactoTomi.setTelefono("+5491141882877");
-        contactoTomi.setFormasNotificacion(Arrays.asList(new Whatsapp()));
+        contactoTomi.setTipoNotificaciones(Arrays.asList(TipoNotificacion.Whatsapp));
 
         Contacto contactoJose = new Contacto();
         contactoJose.setNombre("Jose");
         contactoJose.setApellido("Barreto");
         contactoJose.setTelefono("+5491138814218");
-        contactoJose.setFormasNotificacion(Arrays.asList(new Whatsapp()));
+        contactoJose.setTipoNotificaciones(Arrays.asList(TipoNotificacion.Whatsapp));
 
         Contacto contactoLau = new Contacto();
         contactoLau.setNombre("Lautaro");
         contactoLau.setApellido("Robles");
         contactoLau.setTelefono("+5491123121301");
-        contactoLau.setFormasNotificacion(Arrays.asList(new Whatsapp()));
+        contactoLau.setTipoNotificaciones(Arrays.asList(TipoNotificacion.Whatsapp));
 
         this.duenioMascota.setContactos(Arrays.asList(contactoTomi, contactoJose, contactoLau));
 

@@ -4,7 +4,7 @@ import com.patitas.modelo.Contacto;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
-public class Whatsapp extends Notificacion{
+public class Whatsapp extends EstrategiaNotificacion {
     public void enviar(Mensaje mensaje, Contacto contacto) {
         PhoneNumber from = new PhoneNumber("whatsapp:+14155238886");
         PhoneNumber to   = new PhoneNumber("whatsapp:"+contacto.getTelefono());

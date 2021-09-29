@@ -21,8 +21,14 @@ public class Persona {
     private String tipoDeDocumento;
     private String nroDocumento;
     private String direccion;
-    @Transient
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_persona")
     private List<Contacto> contactos;
-    @Transient
+
+    @OneToMany(mappedBy = "duenio",
+            orphanRemoval = true,
+            fetch = FetchType.LAZY,     // Solo obtengo las mascotas de la base de datos cuando las necesito
+            cascade = CascadeType.ALL)  // Si borro la persona se borran todas sus mascotas de la base de datos
     private List<Mascota> mascota;
 }

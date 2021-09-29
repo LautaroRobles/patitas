@@ -19,6 +19,7 @@ public class ControladorTest {
         Mascota mascota = (Mascota) repositorioMascota.findById(id).get();
         return mascota;
     }
+
     @PostMapping("/mascota")
     public ResponseEntity<Mascota> GuardarMascota(@RequestBody Mascota mascota) {
         Mascota mascotaGuardada = repositorioMascota.save(mascota);

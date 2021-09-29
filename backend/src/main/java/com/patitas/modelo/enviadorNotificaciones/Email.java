@@ -10,7 +10,7 @@ import com.sendgrid.helpers.mail.objects.Content;
 
 import java.io.IOException;
 
-public class Email extends Notificacion {
+public class Email extends EstrategiaNotificacion {
     private static final String SENDGRID_API_KEY = "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";
 
     public void enviar(Mensaje mensaje, Contacto contacto) {

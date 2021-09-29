@@ -19,26 +19,14 @@ public class Contacto {
     private String apellido;
     private String telefono;
     private String email;
-    // TODO recordar hablar sobre esto en las justificaciones
-    @ElementCollection
+    @ElementCollection              // Listado de elementos simples (o sea enums)
+    @Enumerated(EnumType.STRING)    // Para que aparezcan los enums como varchar en la base de datos
     private List<TipoNotificacion> tipoNotificaciones;
-    @Transient
-    private List<Notificacion> formasNotificacion;
 
-    public void setTipoNotificaciones(List<TipoNotificacion> tipoNotificaciones) {
-        this.tipoNotificaciones = tipoNotificaciones;
-        formasNotificacion = tipoNotificaciones.stream().map(tipoNotificacion -> {
-            switch (tipoNotificacion) {
-                case SMS: return new SMS();
-                case Whatsapp: return new Whatsapp();
-                case Email: return new Email();
-                default: return null;
-            }
-        }).collect(Collectors.toList());
-    }
+    // Ya elimine el formas de notificacion
 
     public void enviarNotificaciones(Mensaje mensaje) {
         EnviadorNotificaciones enviadorNotificaciones = EnviadorNotificaciones.getInstancia();
-        enviadorNotificaciones.enviarNotificaciones(this.formasNotificacion, mensaje, this);
+        enviadorNotificaciones.enviarNotificaciones(this.tipoNotificaciones, mensaje, this);
     }
 }
