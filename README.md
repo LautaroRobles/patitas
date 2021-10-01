@@ -9,6 +9,18 @@ Repositorio del Trabajo Práctico Anual del Grupo 4 de Diseño de Sistemas
 |Robaina, Lucas          |1715069|
 |Robles, Lautaro         |1680870|
 
+# Entrega 4.2
+## Diagrama de clases
+![image](https://drive.google.com/uc?export=view&id=1OBaCmsbtkS5pFJQaaxRUJjrOzS8HACdn)
+
+## Diagrama de entidad de relacion
+![image](https://drive.google.com/uc?export=view&id=10_ToDLQNvtBC4S8u02bk48h1NLq67Fjw)
+
+## Justificaciones de diseño
+[Justificaciones de diseño - Entrega 4.xlsx](https://drive.google.com/file/d/1ce1khTY7sArNxSV_evpqNFyANpZgiLvL/view?usp=sharing)
+
+---
+
 # Entrega 4.1
 ## Mockups
 [Link al drive](https://drive.google.com/drive/folders/1AnGFLflSi1PjZnw4mnlD_VlUK5FQyXhk?usp=sharing)
