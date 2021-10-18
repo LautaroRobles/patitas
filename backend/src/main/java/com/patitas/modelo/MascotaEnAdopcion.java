@@ -2,6 +2,8 @@ package com.patitas.modelo;
 import com.patitas.modelo.enviadorNotificaciones.Mensaje;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,10 +12,12 @@ import java.util.List;
 @Entity
 @DiscriminatorValue(value="MascotaEnAdopcion")
 public class MascotaEnAdopcion extends Publicacion{
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch=FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name = "id_mascota_en_adopcion")
     private List<Respuesta> respuestas;
-    @OneToMany
+    @OneToMany(fetch=FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name = "id_mascota_en_adopcion")
     private List<Caracteristica> caracteristicas;
 

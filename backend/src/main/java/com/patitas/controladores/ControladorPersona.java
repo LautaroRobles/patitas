@@ -2,7 +2,9 @@ package com.patitas.controladores;
 
 import com.patitas.dto.RegistrarPersonaDTO;
 import com.patitas.modelo.Persona;
+import com.patitas.modelo.enviadorNotificaciones.Mensaje;
 import com.patitas.servicios.ServicioPersona;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,4 +21,5 @@ public class ControladorPersona {
     Persona registrarPersona(@RequestBody RegistrarPersonaDTO registrarPersonaDTO) {
         return servicioPersona.registrarPersona(registrarPersonaDTO);
     }
+
 }

@@ -1,33 +1,32 @@
 package com.patitas.modelo.scheduler;
 
-import com.patitas.BaseDeDatosTest;
+import com.patitas.daos.DaoPublicacion;
+import com.patitas.daos.DaoRecomendacion;
 import com.patitas.modelo.*;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class JobRecomendacion implements Job {
+
+    @Autowired
+    private DaoPublicacion daoPublicacion;
+    @Autowired
+    private DaoRecomendacion daoRecomendacion;
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        BaseDeDatosTest db = BaseDeDatosTest.getInstancia();
-
         // Se obtienen el listado de interesados y de publicaciones de mascotas en adopcion (De la base de datos)
-        List<QuieroAdoptar> interesados = db.getPublicaciones()
-                .stream()
-                .filter(publicacion -> publicacion instanceof QuieroAdoptar)
-                .map(publicacion -> (QuieroAdoptar) publicacion)
-                .collect(Collectors.toList());
+        List<QuieroAdoptar> interesados = daoPublicacion.findAllQuieroAdoptar();
 
-        List<MascotaEnAdopcion> publicaciones = db.getPublicaciones()
-                .stream()
-                .filter(publicacion -> publicacion instanceof MascotaEnAdopcion)
-                .map(publicacion -> (MascotaEnAdopcion) publicacion)
-                .collect(Collectors.toList());
+        List<MascotaEnAdopcion> publicaciones = daoPublicacion.findAllMascotaEnAdopcion();
 
         if(interesados.size() == 0 || publicaciones.size() == 0)
             return;
@@ -40,17 +39,20 @@ public class JobRecomendacion implements Job {
             publicaciones.forEach(publicacion -> {
 
                 // Verificar que esta publicacion no haya sido recomendada al interesado antes
-                if(interesado.getRecomendaciones()
-                        .stream()
-                        .map(recomendacion -> (Publicacion) recomendacion.getPublicacion())
-                        .collect(Collectors.toList())
-                        .contains(publicacion))
+                if(interesado.getRecomendaciones().stream().anyMatch(recomendacion -> recomendacion.getPublicacion().getId().equals(publicacion.getId())))
                     return;
 
                 // Contamos todas las preferencias que coinciden con las caracteristicas de la publicacion
                 int coinciden = 0;
                 for (Caracteristica preferencia : interesado.getPreferencias()) {
-                    if (publicacion.getCaracteristicas().contains(preferencia)) {
+                    if (publicacion.getCaracteristicas().stream().anyMatch(caracteristica -> {
+                            String tipoCaracteristica = caracteristica.getTipoCaracteristica().getNombre();
+                            String tipoPreferencia = preferencia.getTipoCaracteristica().getNombre();
+                            String valorCaracteristica = caracteristica.getValor();
+                            String valorPreferencia = preferencia.getValor();
+
+                            return tipoPreferencia.equals(tipoCaracteristica) && valorPreferencia.equals(valorCaracteristica);
+                        })) {
                         coinciden++;
                     }
                 }
@@ -58,11 +60,15 @@ public class JobRecomendacion implements Job {
                 // y se agrega al interesado
                 float porcentajeCoinciden = coinciden / (float)interesado.getPreferencias().size() * 100.0f;
                 if(porcentajeCoinciden >= porcentajeMinimo) {
-                    Recomendacion recomendacion = new Recomendacion();
-                    recomendacion.setFecha(new Date());
-                    recomendacion.setPublicacion(publicacion);
+                    Recomendacion nuevaRecomendacion = new Recomendacion();
+                    nuevaRecomendacion.setPublicacion(publicacion);
+                    nuevaRecomendacion.setFecha(new Date());
 
-                    interesado.addRecomendacion(recomendacion);
+                    nuevaRecomendacion = daoRecomendacion.save(nuevaRecomendacion);
+
+                    interesado.addRecomendacion(nuevaRecomendacion);
+
+                    daoPublicacion.save(interesado);
                 }
             });
         });

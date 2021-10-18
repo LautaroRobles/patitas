@@ -6,10 +6,7 @@ import com.patitas.excepciones.UsernameAlreadyTakenException;
 import com.patitas.seguridad.Rol;
 import com.patitas.seguridad.Usuario;
 import com.patitas.seguridad.jwt.TokenProvider;
-import com.patitas.seguridad.validadorContrasenia.ValidacionLongitud;
-import com.patitas.seguridad.validadorContrasenia.ValidacionMismoNombre;
-import com.patitas.seguridad.validadorContrasenia.ValidacionPeoresContrasenias;
-import com.patitas.seguridad.validadorContrasenia.ValidadorContrasenia;
+import com.patitas.seguridad.validadorContrasenia.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,6 +17,8 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.patitas.utils.Constants.LONGITUD_MINIMA_CONTRASENIAS;
 
 @Service
 public class ServicioUsuario implements UserDetailsService {
@@ -33,7 +32,13 @@ public class ServicioUsuario implements UserDetailsService {
 
     public ServicioUsuario() {
         validadorContrasenia = new ValidadorContrasenia();
-        validadorContrasenia.setValidaciones(Arrays.asList(new ValidacionLongitud(), new ValidacionMismoNombre(), new ValidacionPeoresContrasenias()));
+
+        ValidacionLongitud validacion1 = new ValidacionLongitud();
+        validacion1.setLongitudMinima(LONGITUD_MINIMA_CONTRASENIAS);
+        ValidacionMismoNombre validacion2 = new ValidacionMismoNombre();
+        ValidacionPeoresContrasenias validacion3 = new ValidacionPeoresContrasenias();
+
+        validadorContrasenia.setValidaciones(Arrays.asList(validacion1, validacion2, validacion3));
     }
 
     // TODO hacer refresh
@@ -50,7 +55,7 @@ public class ServicioUsuario implements UserDetailsService {
     }
 
     public Usuario registrar(String username, String password, String email, Rol rol) throws InvalidPasswordException, UsernameAlreadyTakenException {
-        if(!validadorContrasenia.validarContrasenia(username, password, email)) {
+        if(!validadorContrasenia.validarContrasenia(password, username, email)) {
             throw new InvalidPasswordException("Contraseña no valida");
         }
 
