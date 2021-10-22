@@ -44,7 +44,7 @@ public class ControladorPublicacion {
 
     @PostMapping("/{id}/aprobar")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasRole('ROL_VOLUNTARIO')")
+    @PreAuthorize("hasRole('ROLE_VOLUNTARIO')")
     Publicacion aprobarPublicacion(@PathVariable Long id) throws NotFoundException {
         return servicioPublicacion.aprobarPublicacion(id);
     }

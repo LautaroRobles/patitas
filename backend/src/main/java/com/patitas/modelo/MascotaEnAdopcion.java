@@ -12,11 +12,11 @@ import java.util.List;
 @Entity
 @DiscriminatorValue(value="MascotaEnAdopcion")
 public class MascotaEnAdopcion extends Publicacion{
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name = "id_mascota_en_adopcion")
     private List<Respuesta> respuestas;
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name = "id_mascota_en_adopcion")
     private List<Caracteristica> caracteristicas;

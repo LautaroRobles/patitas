@@ -28,35 +28,35 @@ public class ControladorOrganizacion {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasRole('ROL_ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     Organizacion crearOrganizacion(@RequestBody CrearOrganizacionDTO crearOrganizacionDTO) {
         return servicioOrganizacion.crearOrganizacion(crearOrganizacionDTO);
     }
 
     @PostMapping("/{id}/caracteristica")
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasRole('ROL_ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     TipoCaracteristica crearTipoCaracteristica(@PathVariable Long id, @RequestBody TipoCaracteristica tipoCaracteristica) throws NotFoundException {
         return servicioOrganizacion.crearTipoCaracteristica(id, tipoCaracteristica.getNombre(), tipoCaracteristica.getDisponible());
     }
 
     @PostMapping("/{idOrganizacion}/caracteristica/{idCaracteristica}")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasRole('ROL_ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     TipoCaracteristica actualizarCaracteristica(@PathVariable Long idOrganizacion, @PathVariable Long idCaracteristica, @RequestBody TipoCaracteristica tipoCaracteristica) throws NotFoundException {
         return servicioOrganizacion.guardarTipoCaracteristica(idCaracteristica, tipoCaracteristica.getNombre(), tipoCaracteristica.getDisponible());
     }
 
     @PostMapping("/{idOrganizacion}/pregunta")
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasRole('ROL_ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     Pregunta crearPregunta(@PathVariable Long idOrganizacion, @RequestBody Pregunta pregunta) throws NotFoundException {
         return servicioOrganizacion.crearPreguntaDisponible(idOrganizacion, pregunta.getTexto(), pregunta.getActivo(), pregunta.getObligatoria());
     }
 
     @PostMapping("/{idOrganizacion}/pregunta/{idPregunta}")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasRole('ROL_ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     Pregunta actualizarPregunta(@PathVariable Long idOrganizacion, @PathVariable Long idPregunta, @RequestBody Pregunta pregunta) throws NotFoundException {
         return servicioOrganizacion.guardarPregunta(idPregunta, pregunta.getTexto(), pregunta.getActivo(), pregunta.getObligatoria());
     }

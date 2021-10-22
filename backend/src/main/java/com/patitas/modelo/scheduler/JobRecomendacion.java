@@ -51,6 +51,9 @@ public class JobRecomendacion implements Job {
                             String valorCaracteristica = caracteristica.getValor();
                             String valorPreferencia = preferencia.getValor();
 
+                            if(tipoCaracteristica == null || tipoPreferencia == null || valorCaracteristica == null || valorPreferencia == null)
+                                return false;
+
                             return tipoPreferencia.equals(tipoCaracteristica) && valorPreferencia.equals(valorCaracteristica);
                         })) {
                         coinciden++;
@@ -61,8 +64,8 @@ public class JobRecomendacion implements Job {
                 float porcentajeCoinciden = coinciden / (float)interesado.getPreferencias().size() * 100.0f;
                 if(porcentajeCoinciden >= porcentajeMinimo) {
                     Recomendacion nuevaRecomendacion = new Recomendacion();
-                    nuevaRecomendacion.setPublicacion(publicacion);
                     nuevaRecomendacion.setFecha(new Date());
+                    nuevaRecomendacion.setPublicacion(publicacion);
 
                     nuevaRecomendacion = daoRecomendacion.save(nuevaRecomendacion);
 

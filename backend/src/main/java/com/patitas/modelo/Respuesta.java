@@ -13,7 +13,7 @@ public class Respuesta  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     private Pregunta pregunta;
     private String valor;
 }

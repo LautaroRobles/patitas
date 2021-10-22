@@ -8,11 +8,9 @@ import com.patitas.modelo.Contacto;
 import com.patitas.modelo.Mascota;
 import com.patitas.modelo.Organizacion;
 import com.patitas.modelo.Persona;
-import com.patitas.modelo.buscadorHogares.MascotaPerdida;
 import com.patitas.modelo.enviadorNotificaciones.Mensaje;
 import javassist.NotFoundException;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.NotReadablePropertyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,11 +29,11 @@ public class ServicioMascota {
     private ModelMapper modelMapper = new ModelMapper();
 
     public MascotaDTO registrarMascota(MascotaDTO mascotaDTO) throws NotFoundException {
-        Organizacion organizacion = daoOrganizacion.findById(mascotaDTO.getOrganizacion()).orElseThrow(
-                () -> new NotFoundException("No existe organizacion con id "+mascotaDTO.getOrganizacion())
+        Organizacion organizacion = daoOrganizacion.findById(mascotaDTO.getOrganizacion_id()).orElseThrow(
+                () -> new NotFoundException("No existe organizacion con id "+mascotaDTO.getOrganizacion_id())
         );
-        Persona duenio = daoPersona.findById(mascotaDTO.getDuenio()).orElseThrow(
-                () -> new NotFoundException("No existe persona con id "+mascotaDTO.getDuenio())
+        Persona duenio = daoPersona.findById(mascotaDTO.getDuenio_id()).orElseThrow(
+                () -> new NotFoundException("No existe persona con id "+mascotaDTO.getDuenio_id())
         );
 
         Mascota mascota = new Mascota();
@@ -59,8 +57,8 @@ public class ServicioMascota {
         );
 
         MascotaDTO mascotaDTO = modelMapper.map(mascota, MascotaDTO.class);
-        mascotaDTO.setOrganizacion(mascota.getOrganizacion().getId());
-        mascotaDTO.setDuenio(mascota.getDuenio().getId());
+        mascotaDTO.setOrganizacion_id(mascota.getOrganizacion().getId());
+        mascotaDTO.setDuenio_id(mascota.getDuenio().getId());
 
         return mascotaDTO;
     }

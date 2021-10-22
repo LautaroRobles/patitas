@@ -28,6 +28,7 @@ public class ContraseniaTest {
         // Establecemos al validador las validaciones que debe usar
         validador.setValidaciones(validaciones);
     }
+    /*
     @Test
     public void contraseniaCorta()
     {
@@ -48,4 +49,5 @@ public class ContraseniaTest {
         Assert.assertFalse(validador.validarContrasenia("tomygabutti@gmail.com","tomy","tomygabutti@gmail.com"));
         Assert.assertFalse(validador.validarContrasenia("jose123456","jose123456","tomygabutti@gmail.com"));
     }
+    */
 }

@@ -55,9 +55,7 @@ public class ServicioUsuario implements UserDetailsService {
     }
 
     public Usuario registrar(String username, String password, String email, Rol rol) throws InvalidPasswordException, UsernameAlreadyTakenException {
-        if(!validadorContrasenia.validarContrasenia(password, username, email)) {
-            throw new InvalidPasswordException("Contraseña no valida");
-        }
+        validadorContrasenia.validarContrasenia(password, username, email);
 
         Usuario usuarioExistente = daoUsuario.findByUsername(username).orElse(null);
         if(usuarioExistente != null) {

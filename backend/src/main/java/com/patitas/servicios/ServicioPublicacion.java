@@ -1,8 +1,6 @@
 package com.patitas.servicios;
 
-import com.patitas.daos.DaoOrganizacion;
-import com.patitas.daos.DaoPersona;
-import com.patitas.daos.DaoPublicacion;
+import com.patitas.daos.*;
 import com.patitas.dto.CrearPublicacionDTO;
 import com.patitas.modelo.*;
 import javassist.NotFoundException;
@@ -10,9 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ServicioPublicacion {
@@ -22,21 +18,25 @@ public class ServicioPublicacion {
     private DaoPersona daoPersona;
     @Autowired
     private DaoPublicacion daoPublicacion;
+    @Autowired
+    private DaoPregunta daoPregunta;
+    @Autowired
+    private DaoTipoCaracteristica daoTipoCaracteristica;
 
     private ModelMapper modelMapper = new ModelMapper();
 
     private Organizacion validarOrganizacion(CrearPublicacionDTO crearPublicacionDTO) throws NotFoundException {
-        return daoOrganizacion.findById(crearPublicacionDTO.getId_organizacion()).orElseThrow(
-                () -> new NotFoundException("No existe organizacion con id "+crearPublicacionDTO.getId_organizacion())
+        return daoOrganizacion.findById(crearPublicacionDTO.getOrganizacion_id()).orElseThrow(
+                () -> new NotFoundException("No existe organizacion con id "+crearPublicacionDTO.getOrganizacion_id())
         );
     }
 
     private Persona validarAutor(CrearPublicacionDTO crearPublicacionDTO) throws NotFoundException {
         Persona autor = null;
 
-        if(crearPublicacionDTO.getId_autor() != null) {
-            autor = daoPersona.findById(crearPublicacionDTO.getId_autor()).orElseThrow(
-                    () -> new NotFoundException("No existe persona con id "+crearPublicacionDTO.getId_autor())
+        if(crearPublicacionDTO.getAutor_id() != null) {
+            autor = daoPersona.findById(crearPublicacionDTO.getAutor_id()).orElseThrow(
+                    () -> new NotFoundException("No existe autor con id "+crearPublicacionDTO.getAutor_id())
             );
         }
 
@@ -72,6 +72,32 @@ public class ServicioPublicacion {
         nuevaPublicacion.setAutor(autor);
         nuevaPublicacion.setAprobada(false);
 
+        for(int i = 0; i < nuevaPublicacion.getRespuestas().size(); i++) {
+            Respuesta respuesta = nuevaPublicacion.getRespuestas().get(i);
+            Long pregunta_id = respuesta.getPregunta().getId();
+
+            if(pregunta_id == null) {
+                throw new NotFoundException("Se requiere un id de pregunta ");
+            }
+
+            respuesta.setPregunta(daoPregunta.findById(pregunta_id).orElseThrow(
+                    () -> new NotFoundException("No existe pregunta con id "+pregunta_id)
+            ));
+        }
+
+        for(int i = 0; i < nuevaPublicacion.getCaracteristicas().size(); i++) {
+            Caracteristica caracteristica = nuevaPublicacion.getCaracteristicas().get(i);
+            Long tipo_caracteristica_id = caracteristica.getTipoCaracteristica().getId();
+
+            if(tipo_caracteristica_id == null) {
+                throw new NotFoundException("Se requiere un id de tipo caracteristica ");
+            }
+
+            caracteristica.setTipoCaracteristica(daoTipoCaracteristica.findById(tipo_caracteristica_id).orElseThrow(
+                    () -> new NotFoundException("No existe tipo caracteristica con id "+tipo_caracteristica_id)
+            ));
+        }
+
         nuevaPublicacion = daoPublicacion.save(nuevaPublicacion);
 
         organizacion.getPublicaciones().add(nuevaPublicacion);
@@ -90,6 +116,19 @@ public class ServicioPublicacion {
         nuevaPublicacion.setOrganizacion(organizacion);
         nuevaPublicacion.setAutor(autor);
         nuevaPublicacion.setAprobada(false);
+
+        for(int i = 0; i < nuevaPublicacion.getPreferencias().size(); i++) {
+            Caracteristica caracteristica = nuevaPublicacion.getPreferencias().get(i);
+            Long tipo_caracteristica_id = caracteristica.getTipoCaracteristica().getId();
+
+            if(tipo_caracteristica_id == null) {
+                throw new NotFoundException("Se requiere un id de tipo caracteristica ");
+            }
+
+            caracteristica.setTipoCaracteristica(daoTipoCaracteristica.findById(tipo_caracteristica_id).orElseThrow(
+                    () -> new NotFoundException("No existe tipo caracteristica con id "+tipo_caracteristica_id)
+            ));
+        }
 
         nuevaPublicacion = daoPublicacion.save(nuevaPublicacion);
 

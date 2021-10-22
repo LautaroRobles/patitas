@@ -30,7 +30,7 @@ public class ControladorUsuario {
 
     @PostMapping("/admin")
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasRole('ROL_ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     Usuario registrarAdmin(@RequestBody RegistrarUsuarioDTO registrarUsuarioDTO) throws InvalidPasswordException, UsernameAlreadyTakenException {
         return servicioUsuario.registrar(
                 registrarUsuarioDTO.getUsername(),
@@ -42,7 +42,7 @@ public class ControladorUsuario {
 
     @PostMapping("/voluntario")
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasRole('ROL_ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
     Usuario registrarVoluntario(@RequestBody RegistrarUsuarioDTO registrarUsuarioDTO) throws InvalidPasswordException, UsernameAlreadyTakenException {
         return servicioUsuario.registrar(
                 registrarUsuarioDTO.getUsername(),

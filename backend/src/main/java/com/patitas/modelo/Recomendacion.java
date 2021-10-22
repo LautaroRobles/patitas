@@ -14,7 +14,7 @@ public class Recomendacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     private MascotaEnAdopcion publicacion;
     private Date fecha;
 }

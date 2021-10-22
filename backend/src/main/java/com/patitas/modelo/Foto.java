@@ -12,7 +12,7 @@ public class Foto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Tamanio tamanio;
     private String calidad;
     @Enumerated(EnumType.STRING)

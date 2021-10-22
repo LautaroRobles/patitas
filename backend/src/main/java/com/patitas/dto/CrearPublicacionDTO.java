@@ -10,9 +10,9 @@ import java.util.List;
 
 @Getter @Setter
 public class CrearPublicacionDTO {
-    private Long id_organizacion;
+    private Long organizacion_id;
     private Categoria categoria;
-    private Long id_autor;
+    private Long autor_id;
     private String titulo;
     private String cuerpo;
     private List<Respuesta> respuestas;

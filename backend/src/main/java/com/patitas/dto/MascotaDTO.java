@@ -9,8 +9,8 @@ import java.util.List;
 @Getter @Setter
 public class MascotaDTO {
     private Long id;
-    private Long organizacion;
-    private Long duenio;
+    private Long organizacion_id;
+    private Long duenio_id;
     private Especie especie;
     private String nombre;
     private String apodo;

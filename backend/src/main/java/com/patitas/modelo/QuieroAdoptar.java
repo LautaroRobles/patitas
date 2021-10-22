@@ -13,11 +13,11 @@ import java.util.List;
 @Entity
 @DiscriminatorValue(value="QuieroAdoptar")
 public class QuieroAdoptar extends Publicacion{
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name = "id_quiero_adoptar")
     private List<Caracteristica> preferencias;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name = "id_quiero_adoptar")
     private List<Recomendacion> recomendaciones;

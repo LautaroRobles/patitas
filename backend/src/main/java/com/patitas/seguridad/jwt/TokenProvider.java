@@ -21,7 +21,7 @@ public class TokenProvider {
     public static String generateToken(Usuario usuario) {
         // Genera el token con roles, issuer, fecha, expiración (8h)
 
-        List<GrantedAuthority> grantedAuthorities = AuthorityUtils.createAuthorityList("ROL_" + usuario.getRol());
+        List<GrantedAuthority> grantedAuthorities = AuthorityUtils.createAuthorityList("ROLE_" + usuario.getRol());
 
         return Jwts.builder()
                 .setSubject(usuario.getUsername())

@@ -15,7 +15,7 @@ public class Organizacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private PosicionGeografica ubicacion;
     private String email;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -29,7 +29,7 @@ public class Organizacion {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_organizacion")
     private List<Pregunta> preguntasAdopcion;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Tamanio tamanioEstandar;
 }
 

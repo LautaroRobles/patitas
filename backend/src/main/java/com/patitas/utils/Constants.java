@@ -5,7 +5,7 @@ public class Constants {
 
     public static final String SIGNING_KEY = "KEY_1234";
 
-    public static final int ACCESS_TOKEN_VALIDITY_SECONDS = 900;
+    public static final int ACCESS_TOKEN_VALIDITY_SECONDS = 14400;
 
     public static final String ISSUER_TOKEN = "ISSUER";
 
