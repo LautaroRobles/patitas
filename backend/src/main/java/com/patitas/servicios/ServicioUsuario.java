@@ -1,6 +1,7 @@
 package com.patitas.servicios;
 
 import com.patitas.daos.DaoUsuario;
+import com.patitas.dto.TokenDTO;
 import com.patitas.excepciones.InvalidPasswordException;
 import com.patitas.excepciones.UsernameAlreadyTakenException;
 import com.patitas.seguridad.Rol;
@@ -43,7 +44,7 @@ public class ServicioUsuario implements UserDetailsService {
 
     // TODO hacer refresh
 
-    public String login(String username, String password) throws UsernameNotFoundException {
+    public TokenDTO login(String username, String password) throws UsernameNotFoundException {
         Usuario usuario = loadUserByUsername(username);
 
         // Check if password is correct
@@ -51,7 +52,10 @@ public class ServicioUsuario implements UserDetailsService {
             throw new UsernameNotFoundException("Usuario o contraseña incorrecta");
         }
 
-        return TokenProvider.generateToken(usuario);
+        TokenDTO token = new TokenDTO();
+        token.setToken(TokenProvider.generateToken(usuario));
+
+        return token;
     }
 
     public Usuario registrar(String username, String password, String email, Rol rol) throws InvalidPasswordException, UsernameAlreadyTakenException {

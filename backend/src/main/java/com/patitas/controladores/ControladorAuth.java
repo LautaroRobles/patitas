@@ -1,6 +1,7 @@
 package com.patitas.controladores;
 
 import com.patitas.dto.LoginUsuarioDTO;
+import com.patitas.dto.TokenDTO;
 import com.patitas.servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,7 @@ public class ControladorAuth {
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
-    public String login(@RequestBody LoginUsuarioDTO loginUsuarioDTO) {
+    public TokenDTO login(@RequestBody LoginUsuarioDTO loginUsuarioDTO) {
         return servicioUsuario.login(loginUsuarioDTO.getUsername(), loginUsuarioDTO.getPassword());
     }
 }
