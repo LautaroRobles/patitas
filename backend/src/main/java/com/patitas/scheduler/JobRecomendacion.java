@@ -1,4 +1,4 @@
-package com.patitas.modelo.scheduler;
+package com.patitas.scheduler;
 
 import com.patitas.daos.DaoPublicacion;
 import com.patitas.daos.DaoRecomendacion;

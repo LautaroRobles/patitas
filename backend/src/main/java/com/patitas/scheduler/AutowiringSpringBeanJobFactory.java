@@ -1,4 +1,4 @@
-package com.patitas.modelo.scheduler;
+package com.patitas.scheduler;
 
 import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;

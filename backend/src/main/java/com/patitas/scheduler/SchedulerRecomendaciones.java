@@ -1,4 +1,4 @@
-package com.patitas.modelo.scheduler;
+package com.patitas.scheduler;
 
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
