@@ -15,7 +15,7 @@ import java.util.List;
 @Getter @Setter
 @Entity
 @Table
-public class Usuario implements UserDetails {
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,25 +27,4 @@ public class Usuario implements UserDetails {
     private Persona persona;
     @Enumerated(EnumType.STRING)
     private Rol rol;
-
-    // IGNORAR
-    @Transient
-    @JsonIgnore
-    protected boolean accountNonExpired = true;
-
-    @Transient
-    @JsonIgnore
-    protected boolean accountNonLocked = true;
-
-    @Transient
-    @JsonIgnore
-    protected boolean credentialsNonExpired = true;
-
-    @Transient
-    @JsonIgnore
-    protected boolean enabled = true;
-
-    @Transient
-    @JsonIgnore
-    protected Collection<? extends GrantedAuthority> authorities;
 }

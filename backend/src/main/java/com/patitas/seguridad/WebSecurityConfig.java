@@ -19,9 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private ServicioUsuario servicioUsuario;
-
     @Bean
     public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
@@ -33,24 +30,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // Configuración de la clase que recupera los usuarios y algoritmo para procesar las passwords
-        auth.userDetailsService(servicioUsuario).passwordEncoder(encoder());
-    }
-
-    @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .cors().and()
             .csrf().disable()
             .authorizeRequests()
-            .antMatchers("/api/persona").permitAll()
-            .antMatchers("/api/usuario").permitAll()
-            .antMatchers("/api/mascota").permitAll()
-            .antMatchers("/api/publicacion").permitAll()
+            .antMatchers("/api/persona/*").permitAll()
+            .antMatchers("/api/usuario/*").permitAll()
+            .antMatchers("/api/mascota/*").permitAll()
+            .antMatchers("/api/publicacion/*").permitAll()
             .antMatchers("/api/auth/*").permitAll()
-            .antMatchers("/api/*").authenticated().and()
-            .addFilterBefore(jwtAuthorizationFilterBean(), UsernamePasswordAuthenticationFilter.class);
+            .antMatchers("/api/**").authenticated().and()
+            .addFilterAfter(jwtAuthorizationFilterBean(), UsernamePasswordAuthenticationFilter.class);
     }
 }

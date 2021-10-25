@@ -22,7 +22,7 @@ import java.util.Set;
 import static com.patitas.utils.Constants.LONGITUD_MINIMA_CONTRASENIAS;
 
 @Service
-public class ServicioUsuario implements UserDetailsService {
+public class ServicioUsuario {
 
     @Autowired
     private DaoUsuario daoUsuario;
@@ -45,7 +45,9 @@ public class ServicioUsuario implements UserDetailsService {
     // TODO hacer refresh
 
     public TokenDTO login(String username, String password) throws UsernameNotFoundException {
-        Usuario usuario = loadUserByUsername(username);
+        Usuario usuario = daoUsuario.findByUsername(username).orElseThrow(
+                () -> new UsernameNotFoundException("Usuario o contraseña incorrecta")
+        );
 
         // Check if password is correct
         if(!passwordEncoder.matches(password, usuario.getPassword())) {
@@ -74,19 +76,5 @@ public class ServicioUsuario implements UserDetailsService {
         nuevoUsuario.setRol(rol);
 
         return daoUsuario.save(nuevoUsuario);
-    }
-
-    @Override
-    public Usuario loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario usuario = daoUsuario.findByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException("Usuario o contraseña incorrecta")
-        );
-
-        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-
-        authorities.add(new SimpleGrantedAuthority("ROL_" + usuario.getRol().toString()));
-
-        usuario.setAuthorities(authorities);
-        return usuario;
     }
 }
