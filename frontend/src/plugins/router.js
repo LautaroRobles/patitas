@@ -7,6 +7,9 @@ Vue.use(VueRouter);
 
 import Inicio from '../views/Inicio'
 import Publicaciones from '../views/Publicaciones'
+import Login from "@/views/Login";
+import RegistrarUsuario from "@/views/RegistrarUsuario";
+import RegistrarPersona from "@/views/RegistrarPersona";
 
 const routes = [
     {
@@ -18,6 +21,21 @@ const routes = [
         name: 'publicaciones',
         path: '/publicaciones',
         component: Publicaciones
+    },
+    {
+        name: 'login',
+        path: '/login',
+        component: Login
+    },
+    {
+        name: 'registrar',
+        path: '/registrar',
+        component: RegistrarUsuario
+    },
+    {
+        name: 'registrar-persona',
+        path: '/persona',
+        component: RegistrarPersona
     }
 ]
 

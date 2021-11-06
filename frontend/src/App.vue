@@ -1,6 +1,6 @@
 <template>
     <v-app :style="{background: $vuetify.theme.themes[theme].background}">
-        <app-bar></app-bar>
+        <AppBar/>
         <v-main>
             <v-slide-x-transition mode="out-in">
                 <router-view/>

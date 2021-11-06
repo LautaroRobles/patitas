@@ -7,7 +7,7 @@
                     <v-card-text>Un poco de texto</v-card-text>
                     <v-card-actions>
                         <v-btn color="primary">accionar</v-btn>
-                        <v-btn text color="primary">accionar</v-btn>
+                        <v-btn text color="primary">salir</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-col>
@@ -37,7 +37,6 @@
 
 <script>
 export default {
-    
 }
 </script>
 

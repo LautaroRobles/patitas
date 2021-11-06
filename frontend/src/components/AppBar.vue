@@ -15,9 +15,9 @@
             Patitas
         </v-app-bar-title>
         <v-spacer></v-spacer>
-        <app-bar-avatar></app-bar-avatar>
+        <AppBarAvatar></AppBarAvatar>
         <template v-slot:extension>
-            <app-bar-tabs></app-bar-tabs>
+            <AppBarTabs></AppBarTabs>
             <v-spacer></v-spacer>
             <v-btn icon @click="$vuetify.theme.dark = !$vuetify.theme.dark">
                 <v-icon>{{ darkIcon }}</v-icon>
