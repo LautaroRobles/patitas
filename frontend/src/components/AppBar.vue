@@ -50,7 +50,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 .app-bar-logo {
-    font-family: Pacifico;
+    font-family: Pacifico, serif;
 }
 
 </style>

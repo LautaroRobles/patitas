@@ -119,11 +119,10 @@ export default {
                         this.error_message = message;
                     },
                     default: (response) => {
-                        console.log("default", response)
+                        console.log("default", response.data)
                     },
                     error: (response) => {
-                        let message = response.data.message;
-                        console.log("error", message)
+                        console.log("error", response.data)
                     },
                     always: () => {
                         this.loading = false;

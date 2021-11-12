@@ -1,7 +1,19 @@
 <template>
     <v-container>
-        <h2>Registrar Persona</h2>
-        <v-card class="mt-2">
+        <p class="text-h5 mt-4">Registrar Persona</p>
+        <p>Antes de registrar sus mascotas necesitamos unos datos personales</p>
+        <v-alert
+            v-if="!logeado"
+            type="warning"
+        >
+            Nos dimos cuenta que no estas iniciado sesión, para que se guarden estos datos de persona deberías
+            <router-link class="text-decoration-none" :to="{name: 'registrar-usuario'}">crear una cuenta</router-link> o
+            <router-link class="text-decoration-none" :to="{name: 'login'}">logearte</router-link>
+        </v-alert>
+        <v-card class="mt-6"
+            :loading="loading"
+            :disabled="loading"
+        >
             <v-card-title>Datos de Persona</v-card-title>
             <v-card-text>
                 <v-row>
@@ -67,91 +79,98 @@
                 ></v-text-field>
             </v-card-text>
         </v-card>
-        <v-card class="mt-4">
+        <v-card class="mt-4"
+            :loading="loading"
+            :disabled="loading"
+        >
             <v-card-title>Datos de Contacto</v-card-title>
             <v-card-text>
                 <v-row>
                     <template v-for="contacto in datosDeContacto">
                         <v-col class="col-12 col-sm-6 col-md-4" :key="contacto.key">
-                            <v-card outlined>
-                                <v-card-text>
-                                    <v-text-field
-                                        class="mb-2"
-                                        label="Nombre"
-                                        outlined
-                                        dense
-                                        hide-details
-                                        v-model="contacto.nombre"
-                                    ></v-text-field>
-                                    <v-text-field
-                                        class="mb-2"
-                                        label="Apellido"
-                                        outlined
-                                        dense
-                                        hide-details
-                                        v-model="contacto.apellido"
-                                    ></v-text-field>
-                                    <v-text-field
-                                        class="mb-2"
-                                        label="Telefono"
-                                        outlined
-                                        dense
-                                        hide-details
-                                        v-model="contacto.telefono"
-                                    ></v-text-field>
-                                    <v-text-field
-                                        class="mb-2"
-                                        label="Email"
-                                        outlined
-                                        dense
-                                        hide-details
-                                        v-model="contacto.email"
-                                    ></v-text-field>
-                                    <b>Formas de notificación preferidas</b>
-                                    <v-row no-gutters>
-                                        <v-col>
-                                            <v-checkbox
-                                                label="Whatsapp"
-                                                value="WHATSAPP"
-                                                hide-details
-                                                dense
-                                                v-model="contacto.tipoNotificaciones"
-                                            ></v-checkbox>
-                                        </v-col>
-                                        <v-col>
-                                            <v-checkbox
-                                                label="SMS"
-                                                value="SMS"
-                                                hide-details
-                                                dense
-                                                v-model="contacto.tipoNotificaciones"
-                                            ></v-checkbox>
-                                        </v-col>
-                                        <v-col>
-                                            <v-checkbox
-                                                label="Email"
-                                                value="EMAIL"
-                                                hide-details
-                                                dense
-                                                v-model="contacto.tipoNotificaciones"
-                                            ></v-checkbox>
-                                        </v-col>
-                                    </v-row>
-                                </v-card-text>
-                                <v-card-actions>
-                                    <v-btn
-                                        text
-                                        block
-                                        color="primary"
-                                        @click="borrarContacto(contacto.key)"
-                                    >
-                                        <v-icon left>
-                                            mdi-delete
-                                        </v-icon>
-                                        Borrar contacto
-                                    </v-btn>
-                                </v-card-actions>
-                            </v-card>
+                            <v-sheet outlined color="grey" rounded>
+                                <v-card flat>
+                                    <v-card-text>
+                                        <v-text-field
+                                            class="mb-2"
+                                            label="Nombre"
+                                            outlined
+                                            dense
+                                            hide-details
+                                            v-model="contacto.nombre"
+                                        ></v-text-field>
+                                        <v-text-field
+                                            class="mb-2"
+                                            label="Apellido"
+                                            outlined
+                                            dense
+                                            hide-details
+                                            v-model="contacto.apellido"
+                                        ></v-text-field>
+                                        <v-text-field
+                                            class="mb-2"
+                                            label="Telefono"
+                                            outlined
+                                            dense
+                                            hide-details
+                                            v-model="contacto.telefono"
+                                        ></v-text-field>
+                                        <v-text-field
+                                            class="mb-2"
+                                            label="Email"
+                                            outlined
+                                            dense
+                                            hide-details
+                                            v-model="contacto.email"
+                                        ></v-text-field>
+                                        <b>Formas de notificación preferidas</b>
+                                        <v-row no-gutters>
+                                            <v-col>
+                                                <v-checkbox
+                                                    class="mr-2"
+                                                    label="Whatsapp"
+                                                    value="Whatsapp"
+                                                    hide-details
+                                                    dense
+                                                    v-model="contacto.tipoNotificaciones"
+                                                ></v-checkbox>
+                                            </v-col>
+                                            <v-col>
+                                                <v-checkbox
+                                                    class="mr-2"
+                                                    label="SMS"
+                                                    value="SMS"
+                                                    hide-details
+                                                    dense
+                                                    v-model="contacto.tipoNotificaciones"
+                                                ></v-checkbox>
+                                            </v-col>
+                                            <v-col>
+                                                <v-checkbox
+                                                    label="Email"
+                                                    value="Email"
+                                                    hide-details
+                                                    dense
+                                                    v-model="contacto.tipoNotificaciones"
+                                                ></v-checkbox>
+                                            </v-col>
+                                        </v-row>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-btn
+                                            text
+                                            block
+                                            color="primary"
+                                            @click="borrarContacto(contacto.key)"
+                                        >
+                                            <v-icon left>
+                                                mdi-delete
+                                            </v-icon>
+                                            Borrar contacto
+                                        </v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-sheet>
                         </v-col>
                     </template>
                     <v-col class="col-12 col-sm-6 col-md-4">
@@ -179,9 +198,12 @@
 </template>
 
 <script>
+import RequestHelper from "@/utils/RequestHelper";
+
 export default {
     name: "RegistrarPersona",
     data: () => ({
+        logeado: false,
         loading: false,
         tiposDeDocumento: [
             "DNI",
@@ -226,8 +248,6 @@ export default {
             });
         },
         borrarContacto(key) {
-            console.log(key);
-
             let contactoIndex = null;
             for(let i = 0; i < this.datosDeContacto.length; i++) {
                 if(this.datosDeContacto[i].key === key) {
@@ -239,7 +259,127 @@ export default {
                 this.datosDeContacto.splice(contactoIndex, 1);
         },
         confirmarPersona() {
+            this.loading = true;
 
+            let body = this.datosDePersona;
+            body.contactos = this.datosDeContacto;
+
+            let token = this.$store.getters.getToken;
+
+            const request = {
+                url: "/api/persona",
+                body: body,
+                handler: {
+                    "201": (response) => {
+                        console.log(response.data);
+
+                        let idPersona = response.data.id;
+
+                        if(token) {
+                            this.asociarAUsuario(idPersona);
+                        }
+
+                        this.$router.push({
+                            name: 'registrar-mascota',
+                            params: { idDuenio: idPersona }
+                        });
+                    },
+                    "422": (response) => {
+                        let message = response.data.message;
+
+                        console.log(message);
+
+                        this.error = true;
+                        this.error_message = message;
+                    },
+                    default: (response) => {
+                        console.log("default", response.data)
+                    },
+                    error: (response) => {
+                        console.log("error", response.data)
+                    },
+                    always: () => {
+                        if(!token)
+                            this.loading = false;
+                    }
+                }
+            }
+
+            RequestHelper.post(request);
+        },
+        asociarAUsuario(idPersona) {
+            let token = this.$store.state.token;
+
+            const request = {
+                url: `/api/usuario/asociar/persona/${idPersona}`,
+                config: {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                },
+                handler: {
+                    "200": (response) => {
+                        console.log(response.data);
+                    },
+                    default: (response) => {
+                        console.log("default", response.data)
+                    },
+                    error: (response) => {
+                        console.log("error", response.data)
+                    },
+                    always: () => {
+                        this.loading = false;
+                    }
+                }
+            }
+            RequestHelper.post(request);
+        }
+    },
+    beforeMount() {
+        // Chequear si el usuario ya tiene datos de persona
+        let token = this.$store.state.token;
+
+        if(!token)
+            return;
+
+        this.logeado = true;
+        this.loading = true;
+
+        const request = {
+            url: "/api/usuario",
+            config: {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            },
+            handler: {
+                "200": (response) => {
+                    let persona = response.data.persona;
+
+                    if(persona) {
+                        this.$router.push({
+                            name: 'registrar-mascota',
+                            params: { duenio_id: persona.id }
+                        });
+                    }
+                },
+                default: (response) => {
+                    console.log("default", response.data)
+                },
+                error: (response) => {
+                    console.log("error", response.data)
+                },
+                always: () => {
+                    this.loading = false;
+                }
+            }
+        }
+
+        RequestHelper.get(request);
+    },
+    watch: {
+        '$store.state.token'() {
+            this.logeado = !!this.$store.state.token;
         }
     }
 }
