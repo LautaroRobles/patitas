@@ -3,6 +3,7 @@ package com.patitas.servicios;
 import com.patitas.daos.DaoMascota;
 import com.patitas.daos.DaoOrganizacion;
 import com.patitas.daos.DaoPersona;
+import com.patitas.dto.ListadoMascotasDTO;
 import com.patitas.dto.MascotaDTO;
 import com.patitas.modelo.Contacto;
 import com.patitas.modelo.Mascota;
@@ -13,6 +14,9 @@ import javassist.NotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ServicioMascota {
@@ -49,6 +53,19 @@ public class ServicioMascota {
         mascota.setDescripcion(mascotaDTO.getDescripcion());
 
         return modelMapper.map(daoMascota.save(mascota), MascotaDTO.class);
+    }
+
+    public ListadoMascotasDTO registrarVariasMascotas(ListadoMascotasDTO listadoMascotasDTO) throws NotFoundException {
+        List<MascotaDTO> mascotas = listadoMascotasDTO.getMascotas();
+        List<MascotaDTO> mascotasGuardadas = new ArrayList<>();
+        ListadoMascotasDTO listadoMascotasGuardads = new ListadoMascotasDTO();
+
+        for(int i = 0; i < mascotas.size(); i++) {
+            mascotasGuardadas.add(registrarMascota(mascotas.get(i)));
+        }
+        listadoMascotasGuardads.setMascotas(mascotasGuardadas);
+
+        return listadoMascotasGuardads;
     }
 
     public MascotaDTO getMascota(Long idMascota) throws NotFoundException {

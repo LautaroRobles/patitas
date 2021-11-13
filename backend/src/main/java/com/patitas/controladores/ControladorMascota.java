@@ -1,5 +1,6 @@
 package com.patitas.controladores;
 
+import com.patitas.dto.ListadoMascotasDTO;
 import com.patitas.dto.MascotaDTO;
 import com.patitas.dto.NotificarMascotaDTO;
 import com.patitas.modelo.buscadorHogares.HogarTransito;
@@ -28,6 +29,12 @@ public class ControladorMascota {
     @ResponseStatus(HttpStatus.CREATED)
     MascotaDTO registrarMascota(@RequestBody MascotaDTO mascotaDTO) throws NotFoundException {
         return servicioMascota.registrarMascota(mascotaDTO);
+    }
+
+    @PostMapping("/varias")
+    @ResponseStatus(HttpStatus.CREATED)
+    ListadoMascotasDTO registrarVariasMascotas(@RequestBody ListadoMascotasDTO mascotasDTO) throws NotFoundException {
+        return servicioMascota.registrarVariasMascotas(mascotasDTO);
     }
 
     @GetMapping("/{id}")

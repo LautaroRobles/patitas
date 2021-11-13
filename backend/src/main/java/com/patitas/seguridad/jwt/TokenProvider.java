@@ -52,7 +52,7 @@ public class TokenProvider {
     public static String getUserName(final String token) {
         final JwtParser jwtParser = Jwts.parser().setSigningKey(SIGNING_KEY);
 
-        final Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token);
+        final Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token.replace(TOKEN_BEARER_PREFIX + " ", ""));
 
         return claimsJws.getBody().getSubject();
     }

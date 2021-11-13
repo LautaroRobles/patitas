@@ -25,7 +25,7 @@ public class Organizacion {
             orphanRemoval = true,
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    private List<Publicacion>publicaciones;
+    private List<Publicacion> publicaciones;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_organizacion")
     private List<Pregunta> preguntasAdopcion;

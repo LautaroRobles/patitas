@@ -1,13 +1,16 @@
 package com.patitas.servicios;
 
+import com.patitas.daos.DaoPersona;
 import com.patitas.daos.DaoUsuario;
 import com.patitas.dto.TokenDTO;
 import com.patitas.excepciones.InvalidPasswordException;
 import com.patitas.excepciones.UsernameAlreadyTakenException;
+import com.patitas.modelo.Persona;
 import com.patitas.seguridad.Rol;
 import com.patitas.seguridad.Usuario;
 import com.patitas.seguridad.jwt.TokenProvider;
 import com.patitas.seguridad.validadorContrasenia.*;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,6 +29,8 @@ public class ServicioUsuario {
 
     @Autowired
     private DaoUsuario daoUsuario;
+    @Autowired
+    private DaoPersona daoPersona;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -76,5 +81,26 @@ public class ServicioUsuario {
         nuevoUsuario.setRol(rol);
 
         return daoUsuario.save(nuevoUsuario);
+    }
+
+    public Persona asociarPersonaAUsuario(Long idPersona, String username) throws NotFoundException {
+        Usuario usuario = daoUsuario.findByUsername(username).orElseThrow(
+                () -> new NotFoundException("No se encuentra usuario con username "+ username)
+        );
+        Persona persona = daoPersona.findById(idPersona).orElseThrow(
+                () -> new NotFoundException("No se encuentra persona con id "+idPersona)
+        );
+
+        usuario.setPersona(persona);
+
+        daoUsuario.save(usuario);
+
+        return persona;
+    }
+
+    public Usuario getUsuario(String username) throws NotFoundException {
+        return daoUsuario.findByUsername(username).orElseThrow(
+                () -> new NotFoundException("No se encuentra usuario con username "+ username)
+        );
     }
 }

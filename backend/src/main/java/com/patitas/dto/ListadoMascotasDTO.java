@@ -6,6 +6,6 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter @Setter
-public class CrearVariasMascotasDTO {
+public class ListadoMascotasDTO {
     private List<MascotaDTO> mascotas;
 }
