@@ -1,14 +1,14 @@
 <template>
     <v-container>
-        <p class="text-h5 mt-4">Registrar Persona</p>
-        <p>Antes de registrar sus mascotas necesitamos unos datos personales</p>
+        <p class="text-h5 mt-4">Registro</p>
+        <p>Antes de continuar necesitamos unos datos personales</p>
         <v-alert
             v-if="!logeado"
             type="warning"
         >
-            Nos dimos cuenta que no estas iniciado sesión, para que se guarden estos datos de persona deberías
+            No estas iniciado sesión, para tener acceso a esta información y cambiarla a futuro deberías
             <router-link class="text-decoration-none" :to="{name: 'registrar-usuario'}">crear una cuenta</router-link> o
-            <router-link class="text-decoration-none" :to="{name: 'login'}">logearte</router-link>
+            <router-link class="text-decoration-none" :to="{name: 'login'}">iniciar sesion</router-link>
         </v-alert>
         <v-card class="mt-6"
             :loading="loading"
@@ -202,6 +202,9 @@ import RequestHelper from "@/utils/RequestHelper";
 
 export default {
     name: "RegistrarPersona",
+    props: {
+        goto: Object
+    },
     data: () => ({
         logeado: false,
         loading: false,
@@ -229,7 +232,7 @@ export default {
                 email: "",
                 tipoNotificaciones: []
             }
-        ]
+        ],
     }),
     methods: {
         crearContacto() {
@@ -279,10 +282,8 @@ export default {
                             this.asociarAUsuario(idPersona);
                         }
 
-                        this.$router.push({
-                            name: 'registrar-mascota',
-                            params: { idDuenio: idPersona }
-                        });
+                        this.goto.params =  { duenio_id: idPersona };
+                        this.$router.push(this.goto);
                     },
                     "422": (response) => {
                         let message = response.data.message;
@@ -357,10 +358,8 @@ export default {
                     let persona = response.data.persona;
 
                     if(persona) {
-                        this.$router.push({
-                            name: 'registrar-mascota',
-                            params: { duenio_id: persona.id }
-                        });
+                        this.goto.params =  { duenio_id: persona.id };
+                        this.$router.push(this.goto);
                     }
                 },
                 default: (response) => {

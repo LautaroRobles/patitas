@@ -120,12 +120,22 @@
         <v-dialog
             v-model="exito"
             persistent
-            max-width="400"
+            max-width="900"
         >
             <v-card>
                 <v-card-title>¡Registro exitoso!</v-card-title>
                 <v-card-text>
-                    Sus mascotas fueron cargadas correctamente
+                    <p>Sus mascotas fueron cargadas correctamente</p>
+                    <v-row>
+                        <v-col
+                            v-for="mascota in mascotas_guardadas"
+                            :key=mascota.id
+                            class="d-flex flex-column align-center"
+                        >
+                            <p class="text-h5">{{ mascota.nombre }}</p>
+                            <qr-code :text="`localhost:8081/mascota/${mascota.id}`"></qr-code>
+                        </v-col>
+                    </v-row>
                 </v-card-text>
                 <v-card-actions>
                     <v-btn text color="primary" to="/">Ir al inicio</v-btn>
@@ -162,7 +172,8 @@ export default {
                 descripcion: "",
                 caracteristicas: []
             }
-        ]
+        ],
+        mascotas_guardadas: []
     }),
     methods: {
         confirmarMascotas() {
@@ -182,7 +193,8 @@ export default {
                 body: body,
                 handler: {
                     "201": (response) => {
-                        console.log(response.data);
+                        this.mascotas_guardadas = response.data.mascotas;
+                        console.log(this.mascotas_guardadas);
                         this.exito = true;
                     },
                     error: (response) => {

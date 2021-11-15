@@ -3,7 +3,9 @@ import App from './App.vue'
 import router from './plugins/router'
 import store from './plugins/store'
 import vuetify from './plugins/vuetify'
+import VueQRCodeComponent from 'vue-qr-generator'
 
+Vue.component('qr-code', VueQRCodeComponent)
 Vue.config.productionTip = false
 
 new Vue({

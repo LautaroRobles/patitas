@@ -32,6 +32,7 @@
                 </v-card>
             </v-col>
         </v-row>
+        <qr-code text="google.com"></qr-code>
     </v-container>
 </template>
 

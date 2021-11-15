@@ -13,6 +13,7 @@ import RegistrarPersona from "@/views/RegistrarPersona";
 import RegistrarMascota from "@/views/RegistrarMascota";
 import ConfiguracionUsuario from "@/views/ConfiguracionUsuario";
 import RegistrarMascotaPersona from "@/views/RegistrarMascotaPersona";
+import Mascota from "@/views/Mascota";
 
 const routes = [
     {
@@ -48,6 +49,9 @@ const routes = [
                 name: 'registrar-persona',
                 path: 'persona',
                 component: RegistrarPersona,
+                props: {
+                    goto: {name: 'registrar-mascota'}
+                }
             },
             {
                 name: 'registrar-mascota',
@@ -56,6 +60,19 @@ const routes = [
                 props: true
             }
         ]
+    },
+    {
+        path: '/registrar/rescatista',
+        name: 'registrar-rescatista',
+        component: RegistrarPersona,
+        props: {
+            goto: {name: 'registrar-mascota-perdida'}
+        }
+    },
+    {
+        name: 'mascota',
+        path: '/mascota/:id',
+        component: Mascota
     },
     {
         name: 'configuracion',
