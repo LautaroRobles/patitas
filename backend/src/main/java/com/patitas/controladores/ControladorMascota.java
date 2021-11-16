@@ -6,6 +6,7 @@ import com.patitas.dto.NotificarMascotaDTO;
 import com.patitas.modelo.buscadorHogares.HogarTransito;
 import com.patitas.modelo.buscadorHogares.MascotaPerdida;
 import com.patitas.modelo.enviadorNotificaciones.Mensaje;
+import com.patitas.seguridad.jwt.TokenProvider;
 import com.patitas.servicios.ServicioHogares;
 import com.patitas.servicios.ServicioMascota;
 import javassist.NotFoundException;
@@ -41,6 +42,13 @@ public class ControladorMascota {
     @ResponseStatus(HttpStatus.OK)
     MascotaDTO getMascota(@PathVariable Long id) throws NotFoundException {
         return servicioMascota.getMascota(id);
+    }
+
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
+    List<MascotaDTO> getMascotas(@RequestHeader (name="Authorization") String token) throws NotFoundException {
+        String username = TokenProvider.getUserName(token);
+        return servicioMascota.listadoMascotas(username);
     }
 
     @PostMapping("/{id}/perdida")

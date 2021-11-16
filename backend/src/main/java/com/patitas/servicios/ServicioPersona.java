@@ -45,4 +45,14 @@ public class ServicioPersona {
 
         return mensaje;
     }
+
+    public Mensaje notificarContacto(Contacto contacto, String titulo, String cuerpo) {
+        Mensaje mensaje = new Mensaje();
+        mensaje.setTitulo(titulo);
+        mensaje.setCuerpo(cuerpo);
+
+        contacto.enviarNotificaciones(mensaje);
+
+        return mensaje;
+    }
 }

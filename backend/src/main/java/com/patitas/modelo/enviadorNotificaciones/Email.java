@@ -19,7 +19,7 @@ public class Email extends EstrategiaNotificacion {
             com.sendgrid.helpers.mail.objects.Email to = new com.sendgrid.helpers.mail.objects.Email(contacto.getEmail());
 
             String subject = mensaje.getTitulo();
-            Content content = new Content("text/html", mensaje.getCuerpo());
+            Content content = new Content("text/plain", mensaje.getCuerpo());
 
             Mail mail = new Mail(from, subject, to, content);
 

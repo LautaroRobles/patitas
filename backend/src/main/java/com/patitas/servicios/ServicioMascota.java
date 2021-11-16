@@ -10,6 +10,7 @@ import com.patitas.modelo.Mascota;
 import com.patitas.modelo.Organizacion;
 import com.patitas.modelo.Persona;
 import com.patitas.modelo.enviadorNotificaciones.Mensaje;
+import com.patitas.seguridad.Usuario;
 import javassist.NotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ public class ServicioMascota {
     private DaoMascota daoMascota;
     @Autowired
     private ServicioPersona servicioPersona;
+    @Autowired
+    private ServicioUsuario servicioUsuario;
 
     private ModelMapper modelMapper = new ModelMapper();
 
@@ -80,6 +83,25 @@ public class ServicioMascota {
         return mascotaDTO;
     }
 
+    public List<MascotaDTO> listadoMascotas(String duenio) throws NotFoundException {
+        Usuario usuario = servicioUsuario.getUsuario(duenio);
+
+        Persona persona = usuario.getPersona();
+
+        if(persona != null) {
+            List<MascotaDTO> mascotasDTO = new ArrayList<>();
+
+            for (Mascota mascota : persona.getMascota()) {
+                mascotasDTO.add(modelMapper.map(mascota, MascotaDTO.class));
+            }
+
+            return mascotasDTO;
+        }
+        else {
+            throw new NotFoundException("El usuario '"+usuario.getUsername()+"' no tiene datos de persona");
+        }
+    }
+
     public Mensaje encontreATuMascota(Long idMascota, Long idRescatista) throws NotFoundException {
         Persona rescatista = daoPersona.findById(idRescatista).orElseThrow(
                 () -> new NotFoundException("No existe rescatista con id "+idRescatista)
@@ -91,21 +113,36 @@ public class ServicioMascota {
 
         Persona duenio = mascota.getDuenio();
 
-        String titulo = "";
-        StringBuilder cuerpo = new StringBuilder("Hola " + duenio.getNombre() + ", encontre tu mascota '" + mascota.getApodo() + "'.\nTe paso mis datos de contacto:\n");
+        Mensaje ultimoMensaje = new Mensaje();
 
         for(int i = 0; i < duenio.getContactos().size(); i++) {
             Contacto contacto = duenio.getContactos().get(i);
 
-            if(!contacto.getTelefono().equals(""))
-                cuerpo.append("Telefono: ").append(contacto.getTelefono()).append("\n");
+            String titulo = "Notificacion de mascota encontrada";
+            StringBuilder cuerpo = new StringBuilder("Hola " + contacto.getNombre() + ", encontre tu mascota '" + mascota.getApodo() + "'.\nTe paso mis datos de contactos:\n");
 
-            if(!contacto.getEmail().equals(""))
-                cuerpo.append("Email: ").append(contacto.getEmail()).append("\n");
+            for(int j = 0; j < rescatista.getContactos().size(); j++) {
+                Contacto contactoRescatista = rescatista.getContactos().get(j);
+
+                cuerpo.append("\n");
+
+                cuerpo.append("Nombre: ").append(contactoRescatista.getNombre() + " " + contactoRescatista.getApellido() + "\n");
+
+                if(!contactoRescatista.getTelefono().equals(""))
+                    cuerpo.append("Telefono: ").append(contactoRescatista.getTelefono()).append("\n");
+
+                if(!contactoRescatista.getEmail().equals(""))
+                    cuerpo.append("Email: ").append(contactoRescatista.getEmail()).append("\n");
+
+                cuerpo.append("\n");
+            }
+
+            cuerpo.append("Saludos, ").append(rescatista.getNombre());
+
+            ultimoMensaje = servicioPersona.notificarContacto(contacto, titulo, cuerpo.toString());
         };
 
-        cuerpo.append("Saludos, ").append(rescatista.getNombre());
 
-        return servicioPersona.notificarPersona(duenio.getId(), titulo, cuerpo.toString());
+        return ultimoMensaje;
     }
 }
