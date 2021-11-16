@@ -34,6 +34,21 @@
                                 <p class="text-h4">{{ descripcion }}</p>
                             </v-col>
                         </v-row>
+                        <v-row>
+                            <v-col>
+                                <v-btn
+                                    color="primary"
+                                    :to="{
+                                        name: 'registrar-rescatista',
+                                        params: {
+                                            idMascota: id
+                                        }
+                                    }"
+                                >
+                                    Encontre esta mascota
+                                </v-btn>
+                            </v-col>
+                        </v-row>
                     </v-card-text>
                 </v-col>
             </v-row>

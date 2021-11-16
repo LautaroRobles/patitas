@@ -27,13 +27,13 @@
                 >
                     <v-list-item
                         link
-                        :to="{name: 'configuracion'}"
+                        :to="{name: 'mascotas'}"
                     >
                         <v-list-item-icon>
-                            <v-icon>mdi-cog</v-icon>
+                            <v-icon>mdi-dog</v-icon>
                         </v-list-item-icon>
                         <v-list-item-action>
-                            <v-list-item-title>Configuración</v-list-item-title>
+                            <v-list-item-title>Mis Mascotas</v-list-item-title>
                         </v-list-item-action>
                     </v-list-item>
                     <v-list-item

@@ -203,7 +203,8 @@ import RequestHelper from "@/utils/RequestHelper";
 export default {
     name: "RegistrarPersona",
     props: {
-        goto: Object
+        goto: Object,
+        mascota_id: Number
     },
     data: () => ({
         logeado: false,
@@ -282,7 +283,10 @@ export default {
                             this.asociarAUsuario(idPersona);
                         }
 
-                        this.goto.params =  { duenio_id: idPersona };
+                        this.goto.params =  {
+                            persona_id: idPersona,
+                            idMascota: this.$route.params.idMascota
+                        };
                         this.$router.push(this.goto);
                     },
                     "422": (response) => {
@@ -358,7 +362,10 @@ export default {
                     let persona = response.data.persona;
 
                     if(persona) {
-                        this.goto.params =  { duenio_id: persona.id };
+                        this.goto.params =  {
+                            persona_id: persona.id,
+                            idMascota: this.$route.params.idMascota
+                        };
                         this.$router.push(this.goto);
                     }
                 },

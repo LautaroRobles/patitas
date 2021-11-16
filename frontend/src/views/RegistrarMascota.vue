@@ -133,7 +133,7 @@
                             class="d-flex flex-column align-center"
                         >
                             <p class="text-h5">{{ mascota.nombre }}</p>
-                            <qr-code :text="`localhost:8081/mascota/${mascota.id}`"></qr-code>
+                            <qr-code :text="`patitas.conlatoso.com/mascota/${mascota.id}/perdida`"></qr-code>
                         </v-col>
                     </v-row>
                 </v-card-text>
@@ -152,7 +152,7 @@ import RequestHelper from "@/utils/RequestHelper";
 export default {
     name: "RegistrarMascota",
     props: {
-        duenio_id: Number
+        persona_id: Number
     },
     components: {
         SeleccionarOrganizacion: SeleccionarOrganizacion
@@ -184,7 +184,7 @@ export default {
             }
 
             body.mascotas.forEach(mascota => {
-                mascota.duenio_id = this.duenio_id;
+                mascota.duenio_id = this.persona_id;
                 mascota.organizacion_id = this.organizacion_id;
             });
 
@@ -229,7 +229,7 @@ export default {
         }
     },
     created() {
-        if(!this.duenio_id) {
+        if(!this.persona_id) {
             this.$router.push({name: "registrar-persona"});
         }
     }

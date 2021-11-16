@@ -13,6 +13,9 @@ import RegistrarPersona from "@/views/RegistrarPersona";
 import RegistrarMascota from "@/views/RegistrarMascota";
 import ConfiguracionUsuario from "@/views/ConfiguracionUsuario";
 import RegistrarMascotaPersona from "@/views/RegistrarMascotaPersona";
+import NotificarDuenioMascota from "@/views/NotificarDuenioMascota";
+import MascotaPerdida from "@/views/MascotaPerdida";
+import Mascotas from "@/views/Mascotas";
 import Mascota from "@/views/Mascota";
 
 const routes = [
@@ -62,17 +65,36 @@ const routes = [
         ]
     },
     {
-        path: '/registrar/rescatista',
         name: 'registrar-rescatista',
+        path: '/registrar/rescatista/:idMascota',
         component: RegistrarPersona,
         props: {
-            goto: {name: 'registrar-mascota-perdida'}
+            goto: {name: 'notificar-duenio'}
+        }
+    },
+    {
+        name: 'mascotas',
+        path: '/mascota',
+        component: Mascotas,
+        props: {
+            goto: {name: 'mascota'}
         }
     },
     {
         name: 'mascota',
         path: '/mascota/:id',
         component: Mascota
+    },
+    {
+        name: 'mascota-perdida',
+        path: '/mascota/:id/perdida',
+        component: MascotaPerdida
+    },
+    {
+        path: '/mascota/:idMascota/notificar',
+        name: 'notificar-duenio',
+        component: NotificarDuenioMascota,
+        props: true
     },
     {
         name: 'configuracion',
