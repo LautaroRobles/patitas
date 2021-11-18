@@ -17,6 +17,8 @@ import NotificarDuenioMascota from "@/views/NotificarDuenioMascota";
 import MascotaPerdida from "@/views/MascotaPerdida";
 import Mascotas from "@/views/Mascotas";
 import Mascota from "@/views/Mascota";
+import RegistrarMascotaPerdida from "@/views/RegistrarMascotaPerdida";
+import store from "@/plugins/store";
 
 const routes = [
     {
@@ -27,7 +29,11 @@ const routes = [
     {
         name: 'publicaciones',
         path: '/publicaciones',
-        component: Publicaciones
+        component: Publicaciones,
+        beforeEnter() {
+            let token = store.state.token;
+            window.location.href = `${process.env.VUE_APP_API_URL}/publicacion?token=${token}`;
+        }
     },
     {
         name: 'login',
@@ -91,9 +97,15 @@ const routes = [
         component: MascotaPerdida
     },
     {
-        path: '/mascota/:idMascota/notificar',
         name: 'notificar-duenio',
+        path: '/mascota/:idMascota/notificar',
         component: NotificarDuenioMascota,
+        props: true
+    },
+    {
+        name: 'registrar-mascota-perdida',
+        path: '/mascotaperdida',
+        component: RegistrarMascotaPerdida,
         props: true
     },
     {

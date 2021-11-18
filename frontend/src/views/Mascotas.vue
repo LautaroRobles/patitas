@@ -74,7 +74,7 @@ export default {
                         this.mascotas = response.data;
                     },
                     "403": () => {
-                        this.$router.push({name: "inicio"})
+                        this.$router.push({name: "inicio"});
                     },
                     "404": () => {
                         this.mascotas = [];

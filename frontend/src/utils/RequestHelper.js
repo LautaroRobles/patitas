@@ -1,26 +1,28 @@
 import axios from 'axios'
 
+let server = process.env.VUE_APP_API_URL;
+
 export default {
     get(params) {
-        axios.get(params.url, params.config)
+        axios.get(server + params.url, params.config)
         .then(response => statusHandler(response, params.handler))
         .catch(error => errorHandler(error, params.handler))
         .then(response => alwaysHandler(response, params.handler))
     },
     post(params) {
-        axios.post(params.url, params.body, params.config)
+        axios.post(server + params.url, params.body, params.config)
         .then(response => statusHandler(response, params.handler))
         .catch(error => errorHandler(error, params.handler))
         .then(response => alwaysHandler(response, params.handler))
     },
     put(params) {
-        axios.put(params.url, params.body, params.config)
+        axios.put(server + params.url, params.body, params.config)
         .then(response => statusHandler(response, params.handler))
         .catch(error => errorHandler(error, params.handler))
         .then(response => alwaysHandler(response, params.handler))
     },
     delete(params) {
-        axios.delete(params.url, params.config)
+        axios.delete(server + params.url, params.config)
         .then(response => statusHandler(response, params.handler))
         .catch(error => errorHandler(error, params.handler))
         .then(response => alwaysHandler(response, params.handler))

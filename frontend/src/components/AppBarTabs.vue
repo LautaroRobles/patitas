@@ -29,7 +29,7 @@
                 </v-list-item>
             </v-list>
         </v-menu>
-        <v-tab>Encontre Mascota Perdida</v-tab>
+        <v-tab :to="{name: 'registrar-mascota-perdida'}">Encontre Mascota Perdida</v-tab>
         <v-tab :to="{name: 'publicaciones'}">Publicaciones</v-tab>
         <v-tab v-if="rol === 'ROLE_ADMINISTRADOR'">Gestionar Organizaciones</v-tab>
     </v-tabs>

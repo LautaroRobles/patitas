@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <p class="mt-4 text-h4">Mascota Perdida</p>
+        <p class="mt-8 text-h5">Mascota Perdida</p>
         <v-row>
             <v-col>
                 <v-card>

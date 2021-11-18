@@ -33,7 +33,7 @@
                                 >
                                     Iniciar sesion
                                 </v-btn>
-                                <p class="mt-2">¿No tenés cuenta? <router-link class="text-decoration-none" to="/registrar">Crear cuenta</router-link></p>
+                                <p class="mt-2">¿No tenés cuenta? <router-link class="text-decoration-none" :to="{name: 'registrar-usuario'}">Crear cuenta</router-link></p>
                             </div>
                         </v-col>
                     </v-row>
@@ -103,6 +103,7 @@ export default {
                     }
                 }
             };
+
             RequestHelper.post(request);
         }
     }
