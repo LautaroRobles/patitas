@@ -33,11 +33,17 @@
                                 :position="marker.position"
                             ></GmapMarker>
                         </GmapMap>
-                        <div class="mt-4 d-flex justify-end">
-                            <v-btn color="primary">Publicar</v-btn>
-                        </div>
                     </v-card-text>
                 </v-card>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col class="d-flex justify-end">
+                <v-btn
+                    color="primary"
+                >
+                    Publicar
+                </v-btn>
             </v-col>
         </v-row>
     </v-container>

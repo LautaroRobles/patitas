@@ -21,6 +21,8 @@ public class ServicioPublicacion {
     @Autowired
     private DaoPregunta daoPregunta;
     @Autowired
+    private DaoCategoria daoCategoria;
+    @Autowired
     private DaoTipoCaracteristica daoTipoCaracteristica;
 
     private ModelMapper modelMapper = new ModelMapper();
@@ -138,6 +140,8 @@ public class ServicioPublicacion {
 
         return nuevaPublicacion;
     }
+
+    public List<Categoria> listadoCategorias() {return daoCategoria.findAll();}
 
     public List<Publicacion> listadoPublicaciones(){return daoPublicacion.findAll(); }
     public List<QuieroAdoptar> listadoQuieroAdoptar() {return daoPublicacion.findAllQuieroAdoptar(); }

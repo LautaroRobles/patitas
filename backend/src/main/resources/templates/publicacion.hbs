@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+<div id="app">
+    <v-app :style="{background: $vuetify.theme.themes[theme].background}">
+        <v-main>
+            <v-container>
+                <v-row class="mt-8">
+                    <v-col class="d-flex justify-center">
+                        <v-card v-if="publicacion">
+                            <v-card-title>\{{publicacion.titulo}}</v-card-title>
+                            <v-card-text>\{{publicacion.cuerpo}}</v-card-text>
+                        </v-card>
+                        <v-card v-else width="800">
+                            <v-card-title>Error 404</v-card-title>
+                            <v-card-text>Publicacion no encontrada</v-card-text>
+                        </v-card>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </v-main>
+    </v-app>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script src="https://unpkg.com/vue-router"></script>
+<script>
+    let theme = {
+        theme: {
+            themes: {
+                light: {
+                    primary: "#B54F40",
+                    secondary: "#03A9F4",
+                    accent: "#FF9800",
+                    error: "#F44336",
+                    warning: "#FFC107",
+                    info: "#607D8B",
+                    success: "#4CAF50",
+                    background: '#F4E9E3'
+                },
+                dark: {
+                    primary: "#B54F40"
+                }
+            },
+            dark: false
+        }
+    }
+
+    new Vue({
+        el: '#app',
+        vuetify: new Vuetify(theme),
+        router:  new VueRouter({
+            mode: 'history',
+            routes: []
+        }),
+        data: () => ({
+
+            publicacion:
+            {{#if publicacion}}
+            {
+                {{#with publicacion}}
+                id: {{id}},
+                titulo: "{{titulo}}",
+                cuerpo: "{{cuerpo}}",
+                categoria: "{{categoria.nombre}}",
+                organizacion_id: {{organizacion.id}},
+                autor_id: {{autor.id}},
+                {{/with}}
+            }
+            {{else}}
+                null
+            {{/if}}
+        }),
+        computed: {
+            theme(){
+                return (this.$vuetify.theme.dark) ? 'dark' : 'light'
+            },
+        },
+        created() {
+
+        }
+    })
+</script>
+</body>
+</html>
