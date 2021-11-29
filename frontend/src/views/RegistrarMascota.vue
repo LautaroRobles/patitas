@@ -90,6 +90,29 @@
                             dense
                             v-model="mascota.descripcion"
                         ></v-textarea>
+                        <v-row class="mb-4">
+                            <v-col
+                                sm="6"
+                                md="4"
+                                lg="3"
+                                v-for="(foto, index) in mascota.fotos"
+                                :key="index"
+                            >
+                                <v-img :src="foto.imagenBase64" width="100%"></v-img>
+                            </v-col>
+                        </v-row>
+                        <v-file-input
+                            accept="image/png, image/jpeg"
+                            placeholder="Selecciona fotos para tu mascota"
+                            prepend-icon="mdi-camera"
+                            label="Fotos"
+                            multiple
+                            small-chips
+                            outlined
+                            dense
+                            v-model="mascota.files"
+                            @change="updateFotos(mascota)"
+                        ></v-file-input>
                     </v-card-text>
                 </v-card>
                 <v-card class="mt-4"
@@ -161,18 +184,19 @@ export default {
         loading: false,
         exito: false,
         organizacion_id: null,
-        mascotas: [
-            {
-                key: 1,
-                especie: "Gato",
-                nombre: "",
-                apodo: "",
-                edad: "",
-                sexo: "Macho",
-                descripcion: "",
-                caracteristicas: []
-            }
-        ],
+        nuevaMascota: {
+            key: 1,
+            especie: "Gato",
+            nombre: "",
+            apodo: "",
+            edad: "",
+            sexo: "Macho",
+            descripcion: "",
+            fotos: [],
+            files: [],
+            caracteristicas: []
+        },
+        mascotas: [],
         mascotas_guardadas: []
     }),
     methods: {
@@ -211,28 +235,47 @@ export default {
             this.organizacion_id = id;
         },
         agregarMascota() {
-            let nuevaMascota = {
-                key: 1,
-                especie: "Gato",
-                nombre: "",
-                apodo: "",
-                edad: "",
-                sexo: "Macho",
-                descripcion: "",
-                caracteristicas: []
-            }
+            let nuevaMascota = this.nuevaMascota;
 
             if(this.mascotas.length >= 1)
                 nuevaMascota.key = this.mascotas[this.mascotas.length - 1].key + 1;
 
             this.mascotas.push(nuevaMascota);
+        },
+        updateFotos(mascota) {
+            let files = mascota.files;
+            let fotos = [];
+
+            files.forEach(file => {
+                this.getBase64(file)
+                .then(fileBase64 => {
+                    fotos.push({
+                        imagenBase64: fileBase64
+                    })
+                })
+            })
+
+            mascota.fotos = fotos;
+        },
+        getBase64: function (file) {
+            return new Promise((resolve, reject) => {
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function () {
+                    resolve(reader.result)
+                };
+                reader.onerror = function (error) {
+                    reject('Error: ', error);
+                }
+            })
         }
     },
     created() {
         if(!this.persona_id) {
             this.$router.push({name: "registrar-persona"});
         }
-    }
+        this.agregarMascota();
+    },
 }
 </script>
 

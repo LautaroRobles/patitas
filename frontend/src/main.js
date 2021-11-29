@@ -8,7 +8,7 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 
 Vue.use(VueGoogleMaps, {
     load: {
-        key: 'AIzaSyDWtbvaL0K0XnkOv1R3bwEEeGJ9zhPjzy4',
+        key: 'AIzaSyDTA_sKYNBSOIZkoM3eaUxM_u1yLL67GnE',
         libraries: 'places',
     },
 })

@@ -52,6 +52,7 @@ public class ServicioMascota {
         mascota.setEdad(mascotaDTO.getEdad());
         mascota.setEspecie(mascotaDTO.getEspecie());
         mascota.setSexo(mascotaDTO.getSexo());
+        mascota.setFotos(mascotaDTO.getFotos());
         mascota.setCaracteristicas(mascotaDTO.getCaracteristicas());
         mascota.setDescripcion(mascotaDTO.getDescripcion());
 

@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <p class="text-h5 mt-4">Mis Mascotas</p>
+        <p class="text-h5 mt-4">{{ titulo ? titulo : 'Mis Mascotas' }}</p>
         <v-row
             v-if="mascotas.length"
         >
@@ -14,7 +14,7 @@
                 >
                     <v-img
                         aspect-ratio="1"
-                        :src="require('@/assets/sin_imagen.jpg')"
+                        :src="mascota.fotos.length > 0 ? mascota.fotos[0].imagenBase64 : require('@/assets/sin_imagen.jpg')"
                     ></v-img>
                     <v-card
                         flat
@@ -50,7 +50,8 @@ import RequestHelper from "@/utils/RequestHelper";
 export default {
     name: "Mascotas.vue",
     props: {
-        goto: Object
+        goto: Object,
+        titulo: String
     },
     data: () => ({
         mascotas: [],
@@ -72,6 +73,7 @@ export default {
                 handler: {
                     "200": (response) => {
                         this.mascotas = response.data;
+                        console.log(this.mascotas)
                     },
                     "403": () => {
                         this.$router.push({name: "inicio"});

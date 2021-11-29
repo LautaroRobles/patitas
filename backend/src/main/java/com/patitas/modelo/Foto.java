@@ -17,6 +17,8 @@ public class Foto {
     private String calidad;
     @Enumerated(EnumType.STRING)
     private FormatoImagen formato;
+    @Lob
+    private String imagenBase64;
 
     public void normalizar(Tamanio tamanioEstandar) {
         this.tamanio = tamanioEstandar;

@@ -17,5 +17,6 @@ public class MascotaDTO {
     private Integer edad;
     private Sexo sexo;
     private String descripcion;
+    private List<Foto> fotos;
     private List<Caracteristica> caracteristicas;
 }

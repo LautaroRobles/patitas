@@ -24,7 +24,7 @@
                 <v-list-item link>
                     <v-tab :ripple="false">Adoptar Mascota</v-tab>
                 </v-list-item>
-                <v-list-item link>
+                <v-list-item link :to="{name: 'dar-en-adopcion'}">
                     <v-tab :ripple="false">Dar en Adopción</v-tab>
                 </v-list-item>
             </v-list>

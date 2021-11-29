@@ -9,6 +9,7 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,12 @@ public class ControladorOrganizacion {
     @ResponseStatus(HttpStatus.OK)
     List<Organizacion> listadoOrganizaciones() {
         return servicioOrganizacion.listadoOrganizaciones();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    Organizacion getOrganizacion(@PathVariable Long id) throws NotFoundException {
+        return servicioOrganizacion.getOrganizacion(id);
     }
 
     @PostMapping()

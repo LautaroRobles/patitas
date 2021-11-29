@@ -1,5 +1,6 @@
 <template>
     <v-container>
+        <p class="text-h5 mt-4">Responde las siguientes preguntas para finalizar</p>
         <v-card class="mt-8"
             :loading="loading"
         >
@@ -8,11 +9,10 @@
                     <v-col class="col-12 col-sm-4 col-md-3" :style="'background-color:'+primary">
                         <v-carousel
                             height="300"
-                            dark
-                            v-if="fotos.length > 0"
+                            v-if="mascota.fotos.length > 0"
                         >
                             <v-carousel-item
-                                v-for="(foto,i) in fotos"
+                                v-for="(foto,i) in mascota.fotos"
                                 :key="i"
                                 :src="foto.imagenBase64"
                                 reverse-transition="fade-transition"
@@ -32,49 +32,34 @@
                         <!--
                         <v-img :src="fotos.length > 0 ? fotos[0].imagenBase64 : require('@/assets/sin_imagen.jpg')"></v-img>
                         -->
-                        <p class="mt-4 text-center text-h4 white--text">{{ nombre }}</p>
+                        <p class="mt-4 text-center text-h4 white--text">{{ mascota.nombre }}</p>
                     </v-col>
                     <v-col>
                         <v-card-text>
                             <v-row>
                                 <v-col>
                                     <span>Apodo</span>
-                                    <p class="text-h4">{{ apodo }}</p>
+                                    <p class="text-h4">{{ mascota.apodo }}</p>
                                 </v-col>
                                 <v-col>
                                     <span>Especie</span>
-                                    <p class="text-h4">{{ especie }}</p>
+                                    <p class="text-h4">{{ mascota.especie }}</p>
                                 </v-col>
                             </v-row>
                             <v-row>
                                 <v-col>
                                     <span>Edad</span>
-                                    <p class="text-h4">{{ edad }}</p>
+                                    <p class="text-h4">{{ mascota.edad }}</p>
                                 </v-col>
                                 <v-col>
                                     <span>Sexo</span>
-                                    <p class="text-h4">{{ sexo }}</p>
+                                    <p class="text-h4">{{ mascota.sexo }}</p>
                                 </v-col>
                             </v-row>
                             <v-row>
                                 <v-col>
                                     <span>Descripcion</span>
-                                    <p class="text-h4">{{ descripcion }}</p>
-                                </v-col>
-                            </v-row>
-                            <v-row>
-                                <v-col>
-                                    <v-btn
-                                        color="primary"
-                                        :to="{
-                                            name: 'registrar-rescatista',
-                                            params: {
-                                                idMascota: id
-                                            }
-                                        }"
-                                    >
-                                        Encontre esta mascota
-                                    </v-btn>
+                                    <p class="text-h4">{{ mascota.descripcion }}</p>
                                 </v-col>
                             </v-row>
                         </v-card-text>
@@ -89,20 +74,25 @@
 import RequestHelper from "@/utils/RequestHelper";
 
 export default {
-    name: "Mascota.vue",
+    name: "PreguntasAdopcion",
     data: () => ({
         loading: false,
-        nombre: "",
-        apodo: "",
-        edad: "",
-        especie: "",
-        sexo: "",
-        descripcion: "",
-        id: "",
-        duenio_id: "",
-        organizacion_id: "",
-        fotos: [],
-        caracteristicas: [],
+        mascota: {
+            nombre: "",
+            apodo: "",
+            edad: "",
+            especie: "",
+            sexo: "",
+            descripcion: "",
+            id: "",
+            duenio_id: "",
+            organizacion_id: "",
+            fotos: [],
+            caracteristicas: [],
+        },
+        organizacion: {
+
+        }
     }),
     methods: {
         getMascota() {
@@ -116,19 +106,35 @@ export default {
                     "200": (response) => {
                         let mascota = response.data;
 
-                        this.id = mascota.id;
-                        this.nombre = mascota.nombre;
-                        this.apodo = mascota.apodo;
-                        this.edad = mascota.edad;
-                        this.especie = mascota.especie;
-                        this.sexo = mascota.sexo;
-                        this.descripcion = mascota.descripcion;
-                        this.duenio_id = mascota.duenio_id;
-                        this.fotos = mascota.fotos;
-                        this.organizacion_id = mascota.organizacion_id;
-                        this.caracteristicas = mascota.caracteristicas;
+                        this.mascota = mascota;
 
                         console.log(mascota);
+
+                        this.getOrganizacion(mascota.organizacion_id);
+                    },
+                    error: (response) => {
+                        console.log("error", response.data);
+                    },
+                    always: () => {
+                        this.loading = false;
+                    }
+                }
+            }
+
+            RequestHelper.get(request);
+        },
+        getOrganizacion(idOrganizacion) {
+            this.loading = true;
+
+            const request = {
+                url: `/api/organizacion/${idOrganizacion}`,
+                handler: {
+                    "200": (response) => {
+                        let organizacion = response.data;
+
+                        this.organizacion = organizacion;
+
+                        console.log(organizacion);
                     },
                     error: (response) => {
                         console.log("error", response.data);

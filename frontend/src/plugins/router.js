@@ -19,6 +19,8 @@ import Mascotas from "@/views/Mascotas";
 import Mascota from "@/views/Mascota";
 import RegistrarMascotaPerdida from "@/views/RegistrarMascotaPerdida";
 import store from "@/plugins/store";
+import DarEnAdopcion from "@/views/DarEnAdopcion";
+import PreguntasAdopcion from "@/views/PreguntasAdopcion";
 
 const routes = [
     {
@@ -112,6 +114,26 @@ const routes = [
         name: 'configuracion',
         path: '/configuracion',
         component: ConfiguracionUsuario
+    },
+    {
+        path: '/darenadopcion',
+        component: DarEnAdopcion,
+        children: [
+            {
+                name: 'dar-en-adopcion',
+                path: '',
+                component: Mascotas,
+                props: {
+                    goto: {name: 'dar-en-adopcion_preguntas'},
+                    titulo: "Selecciona Mascota para dar en adopción"
+                }
+            },
+            {
+                name: 'dar-en-adopcion_preguntas',
+                path: 'preguntas',
+                component: PreguntasAdopcion
+            }
+        ]
     }
 ]
 
