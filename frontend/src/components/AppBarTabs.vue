@@ -7,6 +7,7 @@
             bottom
             left
             rounded="t-0"
+            v-if="logged"
         >
             <template v-slot:activator="{ on, attrs }">
                 <v-tab
@@ -47,6 +48,11 @@ export default {
             if(token) {
                 this.rol = token.CLAIM_TOKEN[0];
             }
+        }
+    },
+    computed: {
+        logged() {
+            return !!this.$store.getters.getToken;
         }
     },
     watch: {

@@ -21,6 +21,7 @@ import RegistrarMascotaPerdida from "@/views/RegistrarMascotaPerdida";
 import store from "@/plugins/store";
 import DarEnAdopcion from "@/views/DarEnAdopcion";
 import PreguntasAdopcion from "@/views/PreguntasAdopcion";
+import HogaresDeTransito from "@/views/HogaresDeTransito";
 
 const routes = [
     {
@@ -73,14 +74,6 @@ const routes = [
         ]
     },
     {
-        name: 'registrar-rescatista',
-        path: '/registrar/rescatista/:idMascota',
-        component: RegistrarPersona,
-        props: {
-            goto: {name: 'notificar-duenio'}
-        }
-    },
-    {
         name: 'mascotas',
         path: '/mascota',
         component: Mascotas,
@@ -105,9 +98,31 @@ const routes = [
         props: true
     },
     {
+        name: 'registrar-rescatista',
+        path: '/registrar/rescatista/:idMascota',
+        component: RegistrarPersona,
+        props: {
+            goto: {name: 'notificar-duenio'}
+        }
+    },
+    {
+        name: 'registrar-rescatista-sin-chapita',
+        path: '/registrar/rescatista',
+        component: RegistrarPersona,
+        props: {
+            goto: {name: 'registrar-mascota-perdida'}
+        }
+    },
+    {
         name: 'registrar-mascota-perdida',
         path: '/mascotaperdida',
         component: RegistrarMascotaPerdida,
+        props: true
+    },
+    {
+        name: 'hogares-transito',
+        path: '/hogares',
+        component: HogaresDeTransito,
         props: true
     },
     {

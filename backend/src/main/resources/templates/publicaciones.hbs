@@ -170,9 +170,9 @@
                 {{#each categorias}}
                 {
                     id: {{id}},
-                    value: "{{nombre}}",
-                    text: "{{nombre}}",
-                    descripcion: "{{descripcion}}"
+                    value: `{{nombre}}`,
+                    text: `{{nombre}}`,
+                    descripcion: `{{descripcion}}`
                 },
                 {{/each}}
             ],
@@ -180,8 +180,8 @@
                 {{#each publicaciones}}
                 {
                     id: {{id}},
-                    titulo: "{{titulo}}",
-                    cuerpo: "{{cuerpo}}",
+                    titulo: `{{titulo}}`,
+                    cuerpo: `{{cuerpo}}`,
                     categoria: "{{categoria.nombre}}",
                     organizacion_id: {{organizacion.id}},
                     autor_id: {{autor.id}},

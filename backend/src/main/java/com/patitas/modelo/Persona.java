@@ -25,7 +25,6 @@ public class Persona {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_persona")
-    @JsonIgnore
     private List<Contacto> contactos;
 
     @OneToMany(mappedBy = "duenio",

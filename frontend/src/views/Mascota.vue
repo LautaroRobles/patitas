@@ -7,6 +7,9 @@
                 <v-row>
                     <v-col class="col-12 col-sm-4 col-md-3" :style="'background-color:'+primary">
                         <v-carousel
+                            cycle
+                            hide-delimiters
+                            show-arrows-on-hover
                             height="300"
                             v-if="fotos.length > 0"
                         >

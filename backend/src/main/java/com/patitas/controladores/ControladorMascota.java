@@ -57,7 +57,7 @@ public class ControladorMascota {
         return servicioMascota.encontreATuMascota(id, notificarMascotaDTO.getId_rescatista());
     }
 
-    @GetMapping("/hogar")
+    @PostMapping("/hogar")
     @ResponseStatus(HttpStatus.OK)
     List<HogarTransito> listadoHogaresAdecuados(@PathParam("pagina") int pagina, @RequestBody MascotaPerdida mascotaPerdida) {
         return servicioHogares.listadoHogaresAdecuados(mascotaPerdida, pagina);

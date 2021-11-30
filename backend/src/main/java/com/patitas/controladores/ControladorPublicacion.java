@@ -2,6 +2,7 @@ package com.patitas.controladores;
 
 import com.patitas.dto.CrearPublicacionDTO;
 import com.patitas.excepciones.PublicationTypeException;
+import com.patitas.modelo.Categoria;
 import com.patitas.modelo.Publicacion;
 import com.patitas.servicios.ServicioPublicacion;
 import javassist.NotFoundException;
@@ -47,6 +48,12 @@ public class ControladorPublicacion {
     @PreAuthorize("hasRole('ROLE_VOLUNTARIO')")
     Publicacion aprobarPublicacion(@PathVariable Long id) throws NotFoundException {
         return servicioPublicacion.aprobarPublicacion(id);
+    }
+
+    @GetMapping("/categoria")
+    @ResponseStatus(HttpStatus.OK)
+    List<Categoria> listadoCategorias() {
+        return servicioPublicacion.listadoCategorias();
     }
 
 }

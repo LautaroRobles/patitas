@@ -22,11 +22,12 @@ public class Publicacion {
     @JsonIgnore
     private Organizacion organizacion;
     private Boolean aprobada;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     private Categoria categoria;
     @OneToOne(cascade = CascadeType.ALL)
     private Persona autor;
     private String titulo;
+    @Lob
     private String cuerpo;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_publicacion")

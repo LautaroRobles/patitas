@@ -162,6 +162,7 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-btn text color="primary" to="/">Ir al inicio</v-btn>
+                    <v-btn class="ml-2" v-if="logged" text color="primary" :to="{name: 'mascotas'}">Ver mis mascotas</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -268,6 +269,11 @@ export default {
                     reject('Error: ', error);
                 }
             })
+        }
+    },
+    computed: {
+        logged() {
+            return !!this.$store.getters.getToken;
         }
     },
     created() {

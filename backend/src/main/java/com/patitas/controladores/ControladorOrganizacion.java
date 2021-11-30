@@ -33,6 +33,19 @@ public class ControladorOrganizacion {
         return servicioOrganizacion.getOrganizacion(id);
     }
 
+    @GetMapping("/{id}/pregunta/activa")
+    @ResponseStatus(HttpStatus.OK)
+    List<Pregunta> getPreguntasActivas(@PathVariable Long id) throws NotFoundException {
+        return servicioOrganizacion.listadoPreguntasActivas(id);
+    }
+
+    @GetMapping("/{id}/pregunta")
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
+    List<Pregunta> getPreguntas(@PathVariable Long id) throws NotFoundException {
+        return servicioOrganizacion.listadoPreguntas(id);
+    }
+
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")

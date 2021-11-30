@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ServicioOrganizacion {
@@ -88,5 +89,22 @@ public class ServicioOrganizacion {
         pregunta.setActivo(activo);
         pregunta.setObligatoria(obligatoria);
         return daoPregunta.save(pregunta);
+    }
+
+    public List<Pregunta> listadoPreguntasActivas(Long idOrganizacion) throws NotFoundException {
+        Organizacion organizacion = daoOrganizacion.findById(idOrganizacion).orElseThrow(
+                () -> new NotFoundException("No existe organizacion con id "+idOrganizacion)
+        );
+
+        List<Pregunta> preguntas = organizacion.getPreguntasAdopcion();
+
+        return preguntas.stream().filter(Pregunta::getActivo).collect(Collectors.toList());
+    }
+    public List<Pregunta> listadoPreguntas(Long idOrganizacion) throws NotFoundException {
+        Organizacion organizacion = daoOrganizacion.findById(idOrganizacion).orElseThrow(
+                () -> new NotFoundException("No existe organizacion con id "+idOrganizacion)
+        );
+
+        return organizacion.getPreguntasAdopcion();
     }
 }
