@@ -29,6 +29,8 @@ public class PrecargarBD implements CommandLineRunner {
     @Autowired
     private DaoOrganizacion daoOrganizacion;
     @Autowired
+    private DaoCategoria daoCategoria;
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     @Autowired
     private ServicioOrganizacion servicioOrganizacion;
@@ -89,6 +91,9 @@ public class PrecargarBD implements CommandLineRunner {
     private Categoria RandCategoria() {
         Categoria categoria = new Categoria();
         categoria.setNombre(faker.options().option("Quiero adoptar", "Mascota en adopcion", "Mascota perdida"));
+
+        categoria = daoCategoria.save(categoria);
+
         return categoria;
     }
 
