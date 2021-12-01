@@ -145,7 +145,7 @@ public class PrecargarBD implements CommandLineRunner {
 
     @Override
     public void run(String...args) throws Exception {
-        if(false){
+        if(true){
             return;
         }
 

@@ -34,12 +34,32 @@
                         ></v-text-field>
                     </v-col>
                 </v-row>
-                <v-text-field
-                    label="Fecha de Nacimiento"
-                    outlined
-                    dense
-                    v-model="datosDePersona.fechaDeNacimiento"
-                ></v-text-field>
+                <v-menu
+                    ref="menu"
+                    v-model="menuDatepicker"
+                    :close-on-content-click="false"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                >
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                            v-model="datosDePersona.fechaDeNacimiento"
+                            label="Fecha de nacimiento"
+                            prepend-icon="mdi-calendar"
+                            outlined
+                            dense
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                        ></v-text-field>
+                    </template>
+                    <v-date-picker
+                        v-model="datosDePersona.fechaDeNacimiento"
+                        no-title
+                    >
+                    </v-date-picker>
+                </v-menu>
                 <v-row>
                     <v-col class="col-3">
                         <v-select
@@ -209,6 +229,7 @@ export default {
     data: () => ({
         logeado: false,
         loading: false,
+        menuDatepicker: false,
         tiposDeDocumento: [
             "DNI",
             "Libreta",

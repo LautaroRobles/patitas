@@ -64,6 +64,29 @@
                                     <p class="text-h4">{{ descripcion }}</p>
                                 </v-col>
                             </v-row>
+                            <v-row>
+                                <v-col>
+                                    <v-btn color="primary" outlined block @click="qr === 0 ? qr = true : qr = 0">Ver QR</v-btn>
+                                </v-col>
+                                <v-col>
+                                    <v-btn color="primary" outlined block :to="{name: 'dar-en-adopcion_preguntas', params: {id: id}}">Dar en adopcion<v-icon right>mdi-arrow-right</v-icon></v-btn>
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-col>
+                                    <v-expansion-panels
+                                        v-model="qr"
+                                        flat
+                                        popout
+                                    >
+                                        <v-expansion-panel style="background-color: transparent">
+                                            <v-expansion-panel-content>
+                                                <qr-code :text="`patitas.conlatoso.com/mascota/${id}/perdida`"></qr-code>
+                                            </v-expansion-panel-content>
+                                        </v-expansion-panel>
+                                    </v-expansion-panels>
+                                </v-col>
+                            </v-row>
                         </v-card-text>
                     </v-col>
                 </v-row>
@@ -79,6 +102,7 @@ export default {
     name: "Mascota.vue",
     data: () => ({
         loading: false,
+        qr: false,
         nombre: "",
         apodo: "",
         edad: "",
