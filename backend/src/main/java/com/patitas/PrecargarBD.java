@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -88,28 +89,37 @@ public class PrecargarBD implements CommandLineRunner {
         return usuario;
     }
 
-    private Categoria RandCategoria() {
-        Categoria categoria = new Categoria();
-        categoria.setNombre(faker.options().option("Quiero adoptar", "Mascota en adopcion", "Mascota perdida"));
+    private List<Categoria> CrearCategorias() {
+        List<Categoria> categorias = new ArrayList<>();
 
-        categoria = daoCategoria.save(categoria);
+        Categoria categoria1 = new Categoria();
+        categoria1.setNombre("Quiero adoptar");
+        categorias.add(daoCategoria.save(categoria1));
 
-        return categoria;
+        Categoria categoria2 = new Categoria();
+        categoria2.setNombre("Mascota en adopcion");
+        categorias.add(daoCategoria.save(categoria2));
+
+        Categoria categoria3 = new Categoria();
+        categoria3.setNombre("Mascota perdida");
+        categorias.add(daoCategoria.save(categoria3));
+
+        return categorias;
     }
 
-    private Publicacion RandPublicacion(Usuario autor, Organizacion organizacion) {
+    private Publicacion RandPublicacion(Usuario autor, Organizacion organizacion, List<Categoria> categorias) {
         Publicacion publicacion = new Publicacion();
         publicacion.setTitulo(faker.book().title());
         publicacion.setCuerpo(faker.lorem().paragraph());
-        publicacion.setAprobada(faker.bool().bool());
+        publicacion.setEstado(faker.options().option(EstadoPublicacion.Aprobada, EstadoPublicacion.SinVerificar));
         publicacion.setAutor(autor.getPersona());
-        publicacion.setCategoria(RandCategoria());
+        publicacion.setCategoria(faker.options().nextElement(categorias));
         publicacion.setOrganizacion(organizacion);
 
         return publicacion;
     }
 
-    private void CrearOrganizacionRandom() {
+    private void CrearOrganizacionRandom(List<Categoria> categorias) {
         Organizacion organizacion = new Organizacion();
         organizacion.setNombre(faker.company().name());
         organizacion.setEmail(faker.internet().emailAddress());
@@ -123,9 +133,9 @@ public class PrecargarBD implements CommandLineRunner {
 
         List<Usuario> usuarios = Arrays.asList(RandUsuario(), RandUsuario(), RandUsuario());
         List<Publicacion> publicaciones = Arrays.asList(
-                RandPublicacion(usuarios.get(0), organizacion),
-                RandPublicacion(usuarios.get(1), organizacion),
-                RandPublicacion(usuarios.get(2), organizacion)
+                RandPublicacion(usuarios.get(0), organizacion, categorias),
+                RandPublicacion(usuarios.get(1), organizacion, categorias),
+                RandPublicacion(usuarios.get(2), organizacion, categorias)
         );
 
         organizacion.setPublicaciones(publicaciones);
@@ -135,6 +145,10 @@ public class PrecargarBD implements CommandLineRunner {
 
     @Override
     public void run(String...args) throws Exception {
+        if(false){
+            return;
+        }
+
         Usuario admin = new Usuario();
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("123"));
@@ -153,7 +167,9 @@ public class PrecargarBD implements CommandLineRunner {
         voluntario.setRol(Rol.VOLUNTARIO);
         usuarioRepositorio.save(voluntario);
 
-        CrearOrganizacionRandom();
-        CrearOrganizacionRandom();
+        List<Categoria> categorias = CrearCategorias();
+
+        CrearOrganizacionRandom(categorias);
+        CrearOrganizacionRandom(categorias);
     }
 }

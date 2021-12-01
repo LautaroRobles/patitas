@@ -6,14 +6,17 @@
                 <router-view/>
             </v-slide-x-transition>
         </v-main>
+        <Footer/>
     </v-app>
 </template>
 
 <script>
 import AppBar from '@/components/AppBar'
+import Footer from "@/components/Footer";
 
 export default {
     components: {
+        Footer,
         AppBar
     },
     data: () => ({

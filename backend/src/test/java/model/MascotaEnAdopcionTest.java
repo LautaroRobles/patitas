@@ -65,7 +65,7 @@ public class MascotaEnAdopcionTest {
         this.publicacion.setTitulo("Mascota en Adopción");
         this.publicacion.setCuerpo("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum at pellentesque risus, a sodales lectus.");
         this.publicacion.setAutor(this.duenioMascota);
-        this.publicacion.setAprobada(true);
+        this.publicacion.setEstado(EstadoPublicacion.Aprobada);
     }
 
     @Test

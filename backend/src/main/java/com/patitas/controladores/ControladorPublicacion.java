@@ -50,6 +50,13 @@ public class ControladorPublicacion {
         return servicioPublicacion.aprobarPublicacion(id);
     }
 
+    @PostMapping("/{id}/rechazar")
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ROLE_VOLUNTARIO')")
+    Publicacion rechazarPublicacion(@PathVariable Long id) throws NotFoundException {
+        return servicioPublicacion.rechazarPublicacion(id);
+    }
+
     @GetMapping("/categoria")
     @ResponseStatus(HttpStatus.OK)
     List<Categoria> listadoCategorias() {

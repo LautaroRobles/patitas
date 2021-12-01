@@ -7,7 +7,6 @@
             bottom
             left
             rounded="t-0"
-            v-if="logged"
         >
             <template v-slot:activator="{ on, attrs }">
                 <v-tab
@@ -22,17 +21,17 @@
             </template>
 
             <v-list>
-                <v-list-item link>
+                <v-list-item link @click="irAAdoptarMascota">
                     <v-tab :ripple="false">Adoptar Mascota</v-tab>
                 </v-list-item>
-                <v-list-item link :to="{name: 'dar-en-adopcion'}">
+                <v-list-item link :to="{name: 'dar-en-adopcion'}" v-if="logged">
                     <v-tab :ripple="false">Dar en Adopción</v-tab>
                 </v-list-item>
             </v-list>
         </v-menu>
         <v-tab :to="{name: 'registrar-mascota-perdida'}">Encontre Mascota Perdida</v-tab>
         <v-tab :to="{name: 'publicaciones'}">Publicaciones</v-tab>
-        <v-tab v-if="rol === 'ROLE_ADMINISTRADOR'">Gestionar Organizaciones</v-tab>
+        <v-tab v-if="rol === 'ROLE_ADMINISTRADOR'" :to="{name: 'gestionar-organizacion'}">Gestionar Organizaciones</v-tab>
     </v-tabs>
 </template>
 
@@ -48,6 +47,13 @@ export default {
             if(token) {
                 this.rol = token.CLAIM_TOKEN[0];
             }
+        },
+        irAAdoptarMascota() {
+            let token = this.$store.state.token;
+            let clientePesado = window.location.origin;
+            let filtro = "Mascota en adopcion"
+
+            window.location.href = `${process.env.VUE_APP_API_URL}/publicacion?token=${token}&clientePesado=${clientePesado}&filtro=${filtro}`
         }
     },
     computed: {

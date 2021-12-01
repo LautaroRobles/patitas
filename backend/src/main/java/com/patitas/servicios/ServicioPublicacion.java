@@ -53,7 +53,7 @@ public class ServicioPublicacion {
 
         nuevaPublicacion.setOrganizacion(organizacion);
         nuevaPublicacion.setAutor(autor);
-        nuevaPublicacion.setAprobada(false);
+        nuevaPublicacion.setEstado(EstadoPublicacion.SinVerificar);
 
         nuevaPublicacion = daoPublicacion.save(nuevaPublicacion);
 
@@ -72,7 +72,7 @@ public class ServicioPublicacion {
 
         nuevaPublicacion.setOrganizacion(organizacion);
         nuevaPublicacion.setAutor(autor);
-        nuevaPublicacion.setAprobada(false);
+        nuevaPublicacion.setEstado(EstadoPublicacion.SinVerificar);
 
         for(int i = 0; i < nuevaPublicacion.getRespuestas().size(); i++) {
             Respuesta respuesta = nuevaPublicacion.getRespuestas().get(i);
@@ -117,7 +117,7 @@ public class ServicioPublicacion {
 
         nuevaPublicacion.setOrganizacion(organizacion);
         nuevaPublicacion.setAutor(autor);
-        nuevaPublicacion.setAprobada(false);
+        nuevaPublicacion.setEstado(EstadoPublicacion.SinVerificar);
 
         for(int i = 0; i < nuevaPublicacion.getPreferencias().size(); i++) {
             Caracteristica caracteristica = nuevaPublicacion.getPreferencias().get(i);
@@ -155,7 +155,13 @@ public class ServicioPublicacion {
 
     public Publicacion aprobarPublicacion(Long idPublicacion) throws NotFoundException {
         Publicacion publicacion = findPublicacion(idPublicacion);
-        publicacion.setAprobada(true);
+        publicacion.setEstado(EstadoPublicacion.Aprobada);
+        return daoPublicacion.save(publicacion);
+    }
+
+    public Publicacion rechazarPublicacion(Long idPublicacion) throws NotFoundException {
+        Publicacion publicacion = findPublicacion(idPublicacion);
+        publicacion.setEstado(EstadoPublicacion.Rechazada);
         return daoPublicacion.save(publicacion);
     }
 

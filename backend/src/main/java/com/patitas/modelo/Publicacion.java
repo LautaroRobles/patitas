@@ -21,7 +21,8 @@ public class Publicacion {
     @JoinColumn(name = "id_organizacion")
     @JsonIgnore
     private Organizacion organizacion;
-    private Boolean aprobada;
+    @Enumerated(EnumType.STRING)
+    private EstadoPublicacion estado;
     @OneToOne(cascade = CascadeType.MERGE)
     private Categoria categoria;
     @OneToOne(cascade = CascadeType.ALL)

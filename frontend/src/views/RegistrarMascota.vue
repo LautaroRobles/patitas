@@ -113,6 +113,16 @@
                             v-model="mascota.files"
                             @change="updateFotos(mascota)"
                         ></v-file-input>
+                        <p>Caracteristicas</p>
+                        <template v-for="(caracteristica, index) in mascota.caracteristicas">
+                            <v-text-field
+                                :key="index"
+                                outlined
+                                dense
+                                :label="caracteristica.tipoCaracteristica.nombre"
+                                v-model="caracteristica.valor"
+                            ></v-text-field>
+                        </template>
                     </v-card-text>
                 </v-card>
                 <v-card class="mt-4"
@@ -269,6 +279,38 @@ export default {
                     reject('Error: ', error);
                 }
             })
+        },
+        getCaracteristicasDisponibles() {
+            this.loading = true;
+
+            if(!this.organizacion_id)
+                return;
+
+            let request = {
+                url: `/api/organizacion/${this.organizacion_id}/`,
+                handler: {
+                    "200": (response) => {
+                        let organizacion = response.data;
+
+                        this.mascotas.forEach(mascota => {
+                            organizacion.caracteristicasDisponibles.forEach(tipoCaracteristica => {
+                                mascota.caracteristicas.push({
+                                    tipoCaracteristica: tipoCaracteristica,
+                                    valor: ""
+                                })
+                            })
+                        })
+                    },
+                    error: (response) => {
+                        console.log("error", response.data);
+                    },
+                    always: () => {
+                        this.loading = false;
+                    }
+                }
+            }
+
+            RequestHelper.get(request);
         }
     },
     computed: {
@@ -282,6 +324,11 @@ export default {
         }
         this.agregarMascota();
     },
+    watch: {
+        'organizacion_id'() {
+            this.getCaracteristicasDisponibles();
+        }
+    }
 }
 </script>
 

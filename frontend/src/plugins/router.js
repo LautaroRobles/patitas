@@ -22,6 +22,8 @@ import store from "@/plugins/store";
 import DarEnAdopcion from "@/views/DarEnAdopcion";
 import PreguntasAdopcion from "@/views/PreguntasAdopcion";
 import HogaresDeTransito from "@/views/HogaresDeTransito";
+import GestionarOrganizacion from "@/views/GestionarOrganizacion";
+import CrearPublicacion from "@/views/CrearPublicacion";
 
 const routes = [
     {
@@ -35,8 +37,23 @@ const routes = [
         component: Publicaciones,
         beforeEnter() {
             let token = store.state.token;
-            window.location.href = `${process.env.VUE_APP_API_URL}/publicacion?token=${token}`;
+            let clientePesado = window.location.origin;
+            window.location.href = `${process.env.VUE_APP_API_URL}/publicacion?token=${token}&clientePesado=${clientePesado}&filtro=`;
         }
+    },
+    {
+        name: 'registrar-interesado',
+        path: '/registrar/interesado',
+        component: RegistrarPersona,
+        props: {
+            goto: {name: 'crear-publicacion'}
+        }
+    },
+    {
+        name: 'crear-publicacion',
+        path: '/publicaciones/crear',
+        component: CrearPublicacion,
+        props: true
     },
     {
         name: 'login',
@@ -149,7 +166,20 @@ const routes = [
                 component: PreguntasAdopcion
             }
         ]
-    }
+    },
+    {
+        name: 'gestionar-organizacion',
+        path: '/organizacion',
+        component: GestionarOrganizacion,
+        beforeEnter: (to, from, next) => {
+            let token = store.getters.getToken;
+
+            if(!token || token.CLAIM_TOKEN[0] !== "ROLE_ADMINISTRADOR") {
+                next({name: 'inicio'});
+            }
+            next();
+        }
+    },
 ]
 
 const router = new VueRouter({

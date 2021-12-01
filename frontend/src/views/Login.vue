@@ -96,7 +96,8 @@ export default {
                         console.log("default", response.data)
                     },
                     error: (response) => {
-                        console.log("error", response.data)
+                        console.log("error", response)
+                        this.error = true;
                     },
                     always: () => {
                         this.loading = false;

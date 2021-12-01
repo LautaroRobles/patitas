@@ -41,6 +41,8 @@ export default {
             let id_mascota = this.$route.params.idMascota;
             let id_rescatista = this.persona_id;
 
+            console.log(this.$route.params)
+
             const request = {
                 url: `/api/mascota/${id_mascota}/perdida`,
                 body: {

@@ -4,13 +4,16 @@
         color="primary"
         dark
     >
-        <v-img 
-            max-height="70"
-            max-width="70"
-            contain
-            class="mr-4"
-            :src="require('@/assets/logo.png')"
-        />
+        <router-link :to="{name: 'inicio'}">
+            <v-img
+                max-height="70"
+                max-width="70"
+                contain
+                class="mr-4"
+                :src="require('@/assets/logo.png')"
+                v-ripple
+            />
+        </router-link>
         <v-app-bar-title class="app-bar-logo">
             Patitas
         </v-app-bar-title>

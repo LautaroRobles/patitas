@@ -23,10 +23,19 @@ public class JobRecomendacion implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        // Se obtienen el listado de interesados y de publicaciones de mascotas en adopcion (De la base de datos)
-        List<QuieroAdoptar> interesados = daoPublicacion.findAllQuieroAdoptar();
+        if(true)
+            return;
 
-        List<MascotaEnAdopcion> publicaciones = daoPublicacion.findAllMascotaEnAdopcion();
+        // Se obtienen el listado de interesados y de publicaciones de mascotas en adopcion (De la base de datos)
+        List<QuieroAdoptar> interesados = daoPublicacion.findAllQuieroAdoptar()
+                .stream()
+                .filter(interesado -> interesado.getEstado() == EstadoPublicacion.Aprobada)
+                .collect(Collectors.toList());
+
+        List<MascotaEnAdopcion> publicaciones = daoPublicacion.findAllMascotaEnAdopcion()
+                .stream()
+                .filter(publicacion -> publicacion.getEstado() == EstadoPublicacion.Aprobada)
+                .collect(Collectors.toList());
 
         if(interesados.size() == 0 || publicaciones.size() == 0)
             return;

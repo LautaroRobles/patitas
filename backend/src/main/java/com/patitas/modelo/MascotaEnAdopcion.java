@@ -16,7 +16,7 @@ public class MascotaEnAdopcion extends Publicacion{
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name = "id_mascota_en_adopcion")
     private List<Respuesta> respuestas;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name = "id_mascota_en_adopcion")
     private List<Caracteristica> caracteristicas;

@@ -3,6 +3,7 @@ package com.patitas.controladores;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import com.patitas.modelo.Categoria;
+import com.patitas.modelo.EstadoPublicacion;
 import com.patitas.modelo.Publicacion;
 import com.patitas.seguridad.Rol;
 import com.patitas.seguridad.Usuario;
@@ -36,7 +37,7 @@ public class ControladorPublicacionHtml {
     private ServicioUsuario servicioUsuario;
 
     @GetMapping(value = "/publicacion", produces = MediaType.TEXT_HTML_VALUE)
-    public ResponseEntity<String> vistaPublicaciones(@RequestParam String token) throws IOException {
+    public ResponseEntity<String> vistaPublicaciones(@RequestParam String token, @RequestParam String clientePesado, @RequestParam String filtro) throws IOException {
         Usuario usuario = null;
 
         try {
@@ -53,12 +54,17 @@ public class ControladorPublicacionHtml {
         List<Categoria> categorias = servicioPublicacion.listadoCategorias();
 
         if(usuario == null || usuario.getRol() != Rol.VOLUNTARIO) {
-            publicaciones = publicaciones.stream().filter(Publicacion::getAprobada).collect(Collectors.toList());
+            publicaciones = publicaciones
+                    .stream()
+                    .filter(publicacion -> publicacion.getEstado() == EstadoPublicacion.Aprobada)
+                    .collect(Collectors.toList());
         }
 
         model.put("publicaciones", publicaciones);
         model.put("categorias", categorias);
         model.put("usuario", (usuario != null && usuario.getRol() == Rol.VOLUNTARIO) ? usuario : null);
+        model.put("clientePesado", clientePesado);
+        model.put("filtro", filtro);
 
         String html = template.apply(model);
 
@@ -66,7 +72,7 @@ public class ControladorPublicacionHtml {
     }
 
     @GetMapping(value = "/publicacion/{id}", produces = MediaType.TEXT_HTML_VALUE)
-    public ResponseEntity<String> vistaPublicacion(@PathVariable Long id, @RequestParam String token) throws IOException, NotFoundException {
+    public ResponseEntity<String> vistaPublicacion(@PathVariable Long id, @RequestParam String token, @RequestParam String clientePesado) throws IOException, NotFoundException {
         Usuario usuario = null;
 
         try {
@@ -86,11 +92,12 @@ public class ControladorPublicacionHtml {
         }
         catch (NotFoundException ignored) {}
 
-        if(publicacion != null && !publicacion.getAprobada() && (usuario == null || usuario.getRol() != Rol.VOLUNTARIO)){
+        if(publicacion != null && publicacion.getEstado() != EstadoPublicacion.Aprobada && (usuario == null || usuario.getRol() != Rol.VOLUNTARIO)){
             publicacion = null;
         }
 
         model.put("publicacion", publicacion);
+        model.put("clientePesado", clientePesado);
 
         String html = template.apply(model);
 

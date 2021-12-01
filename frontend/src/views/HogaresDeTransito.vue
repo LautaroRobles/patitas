@@ -38,7 +38,7 @@ export default {
                     caracteristicas: this.caracteristicas,
                     radioMetros: 10000
                 },
-                handerl: {
+                handler: {
                     "200": (response) => {
                         console.log(response.data);
                     },

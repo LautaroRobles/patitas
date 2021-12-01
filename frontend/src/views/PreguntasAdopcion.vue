@@ -137,6 +137,7 @@ export default {
     data: () => ({
         loading: false,
         exito: false,
+        categorias: [],
         mascota: {
             nombre: "",
             apodo: "",
@@ -157,59 +158,6 @@ export default {
         formularioValido: false
     }),
     methods: {
-        getMascota() {
-            this.loading = true;
-
-            let idMascota = this.$route.params.id;
-
-            const request = {
-                url: `/api/mascota/${idMascota}`,
-                handler: {
-                    "200": (response) => {
-                        let mascota = response.data;
-                        this.mascota = mascota;
-                    },
-                    error: (response) => {
-                        console.log("error", response.data);
-                    },
-                    always: () => {
-                        this.loading = false;
-                        this.getPreguntas(this.mascota.organizacion_id);
-                    }
-                }
-            }
-
-            RequestHelper.get(request);
-        },
-        getPreguntas(idOrganizacion) {
-            this.loading = true;
-
-            const request = {
-                url: `/api/organizacion/${idOrganizacion}/pregunta/activa`,
-                handler: {
-                    "200": (response) => {
-                        let preguntas = response.data;
-
-                        preguntas.forEach(pregunta => {
-                            this.respuestas.push({
-                                pregunta: pregunta,
-                                valor: ''
-                            });
-                        })
-
-                        console.log(preguntas);
-                    },
-                    error: (response) => {
-                        console.log("error", response.data);
-                    },
-                    always: () => {
-                        this.loading = false;
-                    }
-                }
-            }
-
-            RequestHelper.get(request);
-        },
         getAutor() {
             // Chequear si el usuario ya tiene datos de persona
             let token = this.$store.state.token;
@@ -246,6 +194,86 @@ export default {
 
             RequestHelper.get(request);
         },
+        getMascota() {
+            this.loading = true;
+
+            let idMascota = this.$route.params.id;
+
+            const request = {
+                url: `/api/mascota/${idMascota}`,
+                handler: {
+                    "200": (response) => {
+                        let mascota = response.data;
+                        this.mascota = mascota;
+                    },
+                    error: (response) => {
+                        console.log("error", response.data);
+                    },
+                    always: () => {
+                        this.loading = false;
+                        this.getPreguntas(this.mascota.organizacion_id);
+                    }
+                }
+            }
+
+            RequestHelper.get(request);
+        },
+        getPreguntas(idOrganizacion) {
+            this.loading = true;
+
+            const request = {
+                url: `/api/organizacion/${idOrganizacion}`,
+                handler: {
+                    "200": (response) => {
+                        let preguntas = response.data.preguntasAdopcion;
+
+                        preguntas.forEach(pregunta => {
+                            this.respuestas.push({
+                                pregunta: pregunta,
+                                valor: ''
+                            });
+                        })
+
+                        console.log(preguntas);
+                    },
+                    error: (response) => {
+                        console.log("error", response.data);
+                    },
+                    always: () => {
+                        this.loading = false;
+                        this.getCategorias();
+                    }
+                }
+            }
+
+            RequestHelper.get(request);
+        },
+        getCategorias() {
+            this.loading = true;
+
+            let request = {
+                url: "/api/publicacion/categoria",
+                handler: {
+                    "200": (response) => {
+                        console.log(response.data);
+
+                        let categorias = response.data;
+                        this.categorias = categorias;
+                    },
+                    default: (response) => {
+                        console.log("default", response.data)
+                    },
+                    error: (response) => {
+                        console.log("error", response.data)
+                    },
+                    always: () => {
+                        this.loading = false;
+                    }
+                }
+            }
+
+            RequestHelper.get(request);
+        },
         publicar() {
             this.loading = true;
 
@@ -274,9 +302,17 @@ export default {
                 }
             }
 
+            let categoria = this.categorias.filter(categoria => categoria.nombre === "Mascota en adopcion")
+
+            if(categoria.length > 0)
+                categoria = categoria[0]
+            else
+                categoria = null
+
             let body = {
                 organizacion_id: this.mascota.organizacion_id,
                 autor_id: this.autor.id,
+                categoria: categoria,
                 titulo: "Mascota en adopcion",
                 cuerpo: `
                     Mi ${especie} ${this.mascota.nombre} ${this.mascota.sexo === "Macho" ? 'lo' : 'la'} estoy dando en adopcion, tiene ${this.mascota.edad} años.\n\n
@@ -295,7 +331,7 @@ export default {
                 url: `/api/publicacion/mascotaenadopcion`,
                 body: body,
                 handler: {
-                    "200": () => {
+                    "201": () => {
                         this.exito = true;
                     },
                     default: (response) => {

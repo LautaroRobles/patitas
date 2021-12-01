@@ -33,6 +33,20 @@ public class ServicioOrganizacion {
         return daoOrganizacion.save(nuevaOrganizacion);
     }
 
+    public Organizacion getOrganizacionEstandar(Long idOrganizacion) throws NotFoundException {
+        Organizacion organizacion = daoOrganizacion.findById(idOrganizacion).orElseThrow(
+                () -> new NotFoundException("No existe organizacion con id "+idOrganizacion)
+        );
+
+        List<Pregunta> preguntas = organizacion.getPreguntasAdopcion();
+        organizacion.setPreguntasAdopcion(preguntas.stream().filter(Pregunta::getActivo).collect(Collectors.toList()));
+
+        List<TipoCaracteristica> caracteristicas = organizacion.getCaracteristicasDisponibles();
+        organizacion.setCaracteristicasDisponibles(caracteristicas.stream().filter(TipoCaracteristica::getDisponible).collect(Collectors.toList()));
+
+        return organizacion;
+    }
+
     public Organizacion getOrganizacion(Long idOrganizacion) throws NotFoundException {
         return daoOrganizacion.findById(idOrganizacion).orElseThrow(
                 () -> new NotFoundException("No existe organizacion con id "+idOrganizacion)
@@ -89,22 +103,5 @@ public class ServicioOrganizacion {
         pregunta.setActivo(activo);
         pregunta.setObligatoria(obligatoria);
         return daoPregunta.save(pregunta);
-    }
-
-    public List<Pregunta> listadoPreguntasActivas(Long idOrganizacion) throws NotFoundException {
-        Organizacion organizacion = daoOrganizacion.findById(idOrganizacion).orElseThrow(
-                () -> new NotFoundException("No existe organizacion con id "+idOrganizacion)
-        );
-
-        List<Pregunta> preguntas = organizacion.getPreguntasAdopcion();
-
-        return preguntas.stream().filter(Pregunta::getActivo).collect(Collectors.toList());
-    }
-    public List<Pregunta> listadoPreguntas(Long idOrganizacion) throws NotFoundException {
-        Organizacion organizacion = daoOrganizacion.findById(idOrganizacion).orElseThrow(
-                () -> new NotFoundException("No existe organizacion con id "+idOrganizacion)
-        );
-
-        return organizacion.getPreguntasAdopcion();
     }
 }

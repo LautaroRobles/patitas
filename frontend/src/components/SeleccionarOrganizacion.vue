@@ -1,6 +1,6 @@
 <template>
     <v-container fluid>
-        <v-card>
+        <v-card class="mt-4">
             <v-card-title>Seleccione Organizacion</v-card-title>
             <v-card-text>
                 <v-row>

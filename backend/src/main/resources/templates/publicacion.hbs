@@ -12,10 +12,22 @@
         <v-main>
             <v-container>
                 <v-row class="mt-8">
-                    <v-col class="d-flex justify-center">
+                    <v-col>
                         <v-card v-if="publicacion">
                             <v-card-title>\{{publicacion.titulo}}</v-card-title>
                             <v-card-text>\{{publicacion.cuerpo}}</v-card-text>
+                            <v-carousel
+                                    cycle
+                                    hide-delimiters
+                                    show-arrows-on-hover
+                                    v-if="publicacion.fotos.length > 0"
+                            >
+                                <v-carousel-item
+                                        v-for="(foto,i) in publicacion.fotos"
+                                        :key="i"
+                                        :src="foto.imagenBase64"
+                                ></v-carousel-item>
+                            </v-carousel>
                         </v-card>
                         <v-card v-else width="800">
                             <v-card-title>Error 404</v-card-title>
@@ -68,9 +80,16 @@
                 {{#with publicacion}}
                 id: {{id}},
                 titulo: "{{titulo}}",
-                cuerpo: "{{cuerpo}}",
+                cuerpo: `{{cuerpo}}`,
                 categoria: "{{categoria.nombre}}",
                 organizacion_id: {{organizacion.id}},
+                fotos: [
+                    {{#each fotos}}
+                        {
+                            imagenBase64: `{{{imagenBase64}}}`
+                        },
+                    {{/each}}
+                ],
                 autor_id: {{autor.id}},
                 {{/with}}
             }
