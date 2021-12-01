@@ -1,6 +1,7 @@
 <template>
     <v-container fluid class="fill-height pa-0">
         <v-carousel
+            cycle
             show-arrows-on-hover
             hide-delimiters
             height="600"
