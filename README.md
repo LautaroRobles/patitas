@@ -11,10 +11,10 @@ Repositorio del Trabajo Práctico Anual del Grupo 4 de Diseño de Sistemas
 
 # Entrega 5 y 6
 ## Diagrama de Componentes
-![image]()
+![image](https://drive.google.com/uc?export=view&id=1KIuNJCPQDbtMDWqbsaYQPLitzM1ilrAw)
 
 ## Diagrama de Despliegue
-![image](https://drive.google.com/file/d/1dQmR1wH_C7R2tX-5zHliCQPqAa3LNxuh/view?usp=sharing)
+![image](https://drive.google.com/uc?export=view&id=1a9i-iDE0ujXy99rz6l_GmPAYs-cUeNAl)
 
 ---
 
