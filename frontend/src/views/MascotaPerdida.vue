@@ -17,8 +17,6 @@
                                 v-for="(foto,i) in fotos"
                                 :key="i"
                                 :src="foto.imagenBase64"
-                                reverse-transition="fade-transition"
-                                transition="fade-transition"
                             ></v-carousel-item>
                         </v-carousel>
                         <v-carousel
