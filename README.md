@@ -9,6 +9,15 @@ Repositorio del Trabajo Práctico Anual del Grupo 4 de Diseño de Sistemas
 |Robaina, Lucas          |1715069|
 |Robles, Lautaro         |1680870|
 
+# Entrega 5 y 6
+## Diagrama de Componentes
+![image](https://drive.google.com/uc?export=view&id=1KIuNJCPQDbtMDWqbsaYQPLitzM1ilrAw)
+
+## Diagrama de Despliegue
+![image](https://drive.google.com/uc?export=view&id=1a9i-iDE0ujXy99rz6l_GmPAYs-cUeNAl)
+
+---
+
 # Entrega 4.2
 ## Diagrama de clases
 ![image](https://drive.google.com/uc?export=view&id=1OBaCmsbtkS5pFJQaaxRUJjrOzS8HACdn)
