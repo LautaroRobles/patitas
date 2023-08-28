@@ -132,6 +132,7 @@ public class PrecargarBD implements CommandLineRunner {
         organizacion.setPreguntasAdopcion(Arrays.asList(RandPregunta(), RandPregunta(), RandPregunta()));
 
         List<Usuario> usuarios = Arrays.asList(RandUsuario(), RandUsuario(), RandUsuario());
+        /*
         List<Publicacion> publicaciones = Arrays.asList(
                 RandPublicacion(usuarios.get(0), organizacion, categorias),
                 RandPublicacion(usuarios.get(1), organizacion, categorias),
@@ -139,6 +140,7 @@ public class PrecargarBD implements CommandLineRunner {
         );
 
         organizacion.setPublicaciones(publicaciones);
+         */
 
         daoOrganizacion.save(organizacion);
     }
